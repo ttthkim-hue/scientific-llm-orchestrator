@@ -1,0 +1,646 @@
+{
+  "deterministic_scan": {
+    "credentials_used": false,
+    "network_used": false,
+    "semantic_review_required": true,
+    "status": "PASS"
+  },
+  "entries": [
+    {
+      "classification": "project-file",
+      "license_status": "Apache-2.0",
+      "path": ".gitattributes",
+      "public_safe_decision": "pass-deterministic-only",
+      "reason": "public-safe candidate; human semantic review remains required",
+      "reviewer_status": "pending-semantic-review",
+      "sha256": "4fb732ccf8112fa79002795fc944e39f9fb71006a4c646fa99d989e5cdcbb46e"
+    },
+    {
+      "classification": "ci-configuration",
+      "license_status": "Apache-2.0",
+      "path": ".github/workflows/qa.yml",
+      "public_safe_decision": "pass-deterministic-only",
+      "reason": "public-safe candidate; human semantic review remains required",
+      "reviewer_status": "pending-semantic-review",
+      "sha256": "4bb94690d6e48cb8cefaee6b057847300f8e2dcf0d0cdddf8a12be2ddc5313b7"
+    },
+    {
+      "classification": "project-file",
+      "license_status": "Apache-2.0",
+      "path": ".gitignore",
+      "public_safe_decision": "pass-deterministic-only",
+      "reason": "public-safe candidate; human semantic review remains required",
+      "reviewer_status": "pending-semantic-review",
+      "sha256": "8141179c528deae06168e162de94eedf6b1195a9b3ff4e8c12f9e32702102c65"
+    },
+    {
+      "classification": "project-metadata",
+      "license_status": "Apache-2.0",
+      "path": "CHANGELOG.md",
+      "public_safe_decision": "pass-deterministic-only",
+      "reason": "public-safe candidate; human semantic review remains required",
+      "reviewer_status": "pending-semantic-review",
+      "sha256": "24954b7bb0742b2db2e5714c6df98e1d4ba4f8c9d8bb218af044b92764dfa1ac"
+    },
+    {
+      "classification": "project-metadata",
+      "license_status": "Apache-2.0",
+      "path": "CITATION.cff",
+      "public_safe_decision": "pass-deterministic-only",
+      "reason": "public-safe candidate; human semantic review remains required",
+      "reviewer_status": "pending-semantic-review",
+      "sha256": "2cd6af767eacb80b19ab95eceb634683ccdf963a1a8e893dcf7c388af8bf040c"
+    },
+    {
+      "classification": "project-metadata",
+      "license_status": "Apache-2.0",
+      "path": "CODE_OF_CONDUCT.md",
+      "public_safe_decision": "pass-deterministic-only",
+      "reason": "public-safe candidate; human semantic review remains required",
+      "reviewer_status": "pending-semantic-review",
+      "sha256": "a176a71ea60d76ed355218d3c57ee0a2030f71a4678de6262081b88a9b228f11"
+    },
+    {
+      "classification": "project-metadata",
+      "license_status": "Apache-2.0",
+      "path": "CONTRIBUTING.md",
+      "public_safe_decision": "pass-deterministic-only",
+      "reason": "public-safe candidate; human semantic review remains required",
+      "reviewer_status": "pending-semantic-review",
+      "sha256": "f94165cc828769e6cb8f28391ec25a40191fdb2983bcd05e21681131e33ca4b5"
+    },
+    {
+      "classification": "project-file",
+      "license_status": "Apache-2.0-or-notice",
+      "path": "LICENSE",
+      "public_safe_decision": "pass-deterministic-only",
+      "reason": "public-safe candidate; human semantic review remains required",
+      "reviewer_status": "pending-semantic-review",
+      "sha256": "5c9817c129b98e7bb966bca028c43c19107102ef8e03fe799bffb4354f4ef015"
+    },
+    {
+      "classification": "project-file",
+      "license_status": "Apache-2.0-or-notice",
+      "path": "NOTICE",
+      "public_safe_decision": "pass-deterministic-only",
+      "reason": "public-safe candidate; human semantic review remains required",
+      "reviewer_status": "pending-semantic-review",
+      "sha256": "7ebc47906a73c913004323d903990773adf881a056e6314b11edf08c55537395"
+    },
+    {
+      "classification": "project-metadata",
+      "license_status": "Apache-2.0",
+      "path": "README.md",
+      "public_safe_decision": "pass-deterministic-only",
+      "reason": "public-safe candidate; human semantic review remains required",
+      "reviewer_status": "pending-semantic-review",
+      "sha256": "cc43163362d1199caba8ded1c915933498da2ba78c0169bbfb031df65657e776"
+    },
+    {
+      "classification": "project-metadata",
+      "license_status": "Apache-2.0",
+      "path": "SECURITY.md",
+      "public_safe_decision": "pass-deterministic-only",
+      "reason": "public-safe candidate; human semantic review remains required",
+      "reviewer_status": "pending-semantic-review",
+      "sha256": "12c76fb37e309c7761b8b2d38e03e05f2a5caaec58c58f2ba4cc45d3f6a98204"
+    },
+    {
+      "classification": "project-metadata",
+      "license_status": "Apache-2.0-or-notice",
+      "path": "THIRD_PARTY_NOTICES.md",
+      "public_safe_decision": "pass-deterministic-only",
+      "reason": "public-safe candidate; human semantic review remains required",
+      "reviewer_status": "pending-semantic-review",
+      "sha256": "a63da455ad4b58f4e7b85cbabd2256c4949cf2d3054efcdc7a3165efab7d1348"
+    },
+    {
+      "classification": "benchmark-method",
+      "license_status": "Apache-2.0",
+      "path": "benchmarks/README.md",
+      "public_safe_decision": "pass-deterministic-only",
+      "reason": "public-safe candidate; human semantic review remains required",
+      "reviewer_status": "pending-semantic-review",
+      "sha256": "662be193e3c0ea0a92a77150ad4ba3375a3c6a6bb6c42c315142715fd67cbde4"
+    },
+    {
+      "classification": "benchmark-method",
+      "license_status": "Apache-2.0",
+      "path": "benchmarks/expected/synthetic-public.expected.json",
+      "public_safe_decision": "pass-deterministic-only",
+      "reason": "public-safe candidate; human semantic review remains required",
+      "reviewer_status": "pending-semantic-review",
+      "sha256": "c5e6b71dc676bbe36f38261e7d4a558871d33601c1889949c27fa2941064cebd"
+    },
+    {
+      "classification": "synthetic-fixture",
+      "license_status": "Apache-2.0",
+      "path": "benchmarks/fixtures/synthetic-public/cad-bracket.json",
+      "public_safe_decision": "pass-deterministic-only",
+      "reason": "public-safe candidate; human semantic review remains required",
+      "reviewer_status": "pending-semantic-review",
+      "sha256": "9c003becb566cb02de751d8809de6664e0deea1012a2402ebcd7f45b2c032a3a"
+    },
+    {
+      "classification": "synthetic-fixture",
+      "license_status": "Apache-2.0",
+      "path": "benchmarks/fixtures/synthetic-public/cad-open-box.json",
+      "public_safe_decision": "pass-deterministic-only",
+      "reason": "public-safe candidate; human semantic review remains required",
+      "reviewer_status": "pending-semantic-review",
+      "sha256": "a0e44d341ee5827e2a6c9669dbffcf8e87d0dc652a8eea6172d3f9d02c0508a4"
+    },
+    {
+      "classification": "synthetic-fixture",
+      "license_status": "Apache-2.0",
+      "path": "benchmarks/fixtures/synthetic-public/coding-normalize-text.json",
+      "public_safe_decision": "pass-deterministic-only",
+      "reason": "public-safe candidate; human semantic review remains required",
+      "reviewer_status": "pending-semantic-review",
+      "sha256": "11b7e82b01e2fb04ecd18c58cc1d2c6408ec04c67d7db0f76f8bc7e91117d562"
+    },
+    {
+      "classification": "synthetic-fixture",
+      "license_status": "Apache-2.0",
+      "path": "benchmarks/fixtures/synthetic-public/coding-safe-ratio.json",
+      "public_safe_decision": "pass-deterministic-only",
+      "reason": "public-safe candidate; human semantic review remains required",
+      "reviewer_status": "pending-semantic-review",
+      "sha256": "b48cd9c4d9c26c053f467189f496de7344a39768cafab9486759e3d8e4f7e5b3"
+    },
+    {
+      "classification": "synthetic-fixture",
+      "license_status": "Apache-2.0",
+      "path": "benchmarks/fixtures/synthetic-public/data-log-summary.json",
+      "public_safe_decision": "pass-deterministic-only",
+      "reason": "public-safe candidate; human semantic review remains required",
+      "reviewer_status": "pending-semantic-review",
+      "sha256": "4a624fed28ddc1d6dd974618a2e8188324894e5b6f31a7ecff9368179d0f0c43"
+    },
+    {
+      "classification": "synthetic-fixture",
+      "license_status": "Apache-2.0",
+      "path": "benchmarks/fixtures/synthetic-public/data-schema-units.json",
+      "public_safe_decision": "pass-deterministic-only",
+      "reason": "public-safe candidate; human semantic review remains required",
+      "reviewer_status": "pending-semantic-review",
+      "sha256": "842cfbb427647e0257a3112c3cd7910930b644c2265f5a5debdec20c0a32f700"
+    },
+    {
+      "classification": "synthetic-fixture",
+      "license_status": "Apache-2.0",
+      "path": "benchmarks/fixtures/synthetic-public/visual-panel-labels.json",
+      "public_safe_decision": "pass-deterministic-only",
+      "reason": "public-safe candidate; human semantic review remains required",
+      "reviewer_status": "pending-semantic-review",
+      "sha256": "d52fa6480b3f8d497336fb00144ff3d0b91a050d47556edf49b3441cda16369e"
+    },
+    {
+      "classification": "synthetic-fixture",
+      "license_status": "Apache-2.0",
+      "path": "benchmarks/fixtures/synthetic-public/visual-scale-bar.json",
+      "public_safe_decision": "pass-deterministic-only",
+      "reason": "public-safe candidate; human semantic review remains required",
+      "reviewer_status": "pending-semantic-review",
+      "sha256": "5964f36df253d17001a362e4f70b9d95bcc6caa3a719deac4f872166ca78ec59"
+    },
+    {
+      "classification": "benchmark-method",
+      "license_status": "Apache-2.0",
+      "path": "benchmarks/scorecards/README.md",
+      "public_safe_decision": "pass-deterministic-only",
+      "reason": "public-safe candidate; human semantic review remains required",
+      "reviewer_status": "pending-semantic-review",
+      "sha256": "3721c17880bc6a986fd84e98fd39bb6545bbc6257d509606489551c6d1bb6fc6"
+    },
+    {
+      "classification": "example-config",
+      "license_status": "Apache-2.0",
+      "path": "configs/example-provider-bindings.json",
+      "public_safe_decision": "pass-deterministic-only",
+      "reason": "public-safe candidate; human semantic review remains required",
+      "reviewer_status": "pending-semantic-review",
+      "sha256": "eb899a918a6a569afb5d01d24f457502fbdc968d30aabc3f72579908e915879e"
+    },
+    {
+      "classification": "example-config",
+      "license_status": "Apache-2.0",
+      "path": "configs/example-routing-policy.json",
+      "public_safe_decision": "pass-deterministic-only",
+      "reason": "public-safe candidate; human semantic review remains required",
+      "reviewer_status": "pending-semantic-review",
+      "sha256": "7376c4808680ab54dd1c507269208877a2708b72761ef13acd374a2cf1f308d9"
+    },
+    {
+      "classification": "documentation",
+      "license_status": "Apache-2.0",
+      "path": "docs/architecture.md",
+      "public_safe_decision": "pass-deterministic-only",
+      "reason": "public-safe candidate; human semantic review remains required",
+      "reviewer_status": "pending-semantic-review",
+      "sha256": "589e429f28911a5dc21d59ed21372ac103cc820a1c9b61884cf46cbd7cd2693e"
+    },
+    {
+      "classification": "documentation",
+      "license_status": "Apache-2.0",
+      "path": "docs/authority-boundaries.md",
+      "public_safe_decision": "pass-deterministic-only",
+      "reason": "public-safe candidate; human semantic review remains required",
+      "reviewer_status": "pending-semantic-review",
+      "sha256": "c5f6da2403aff4dd3a7eeaceed7861c1c4ac7a1f0902dbd321a82c4e51106266"
+    },
+    {
+      "classification": "documentation",
+      "license_status": "Apache-2.0",
+      "path": "docs/benchmark-methodology.md",
+      "public_safe_decision": "pass-deterministic-only",
+      "reason": "public-safe candidate; human semantic review remains required",
+      "reviewer_status": "pending-semantic-review",
+      "sha256": "9e70c7f648a9b518888346579cc19a1395c5658b8917562603255e1a15beb58f"
+    },
+    {
+      "classification": "documentation",
+      "license_status": "Apache-2.0",
+      "path": "docs/final-launch-checklist.md",
+      "public_safe_decision": "pass-deterministic-only",
+      "reason": "public-safe candidate; human semantic review remains required",
+      "reviewer_status": "pending-semantic-review",
+      "sha256": "d5e3ec295dd789616fa576fcee85a9fc8fbaf665b15c3d7888249106e0b0cc01"
+    },
+    {
+      "classification": "documentation",
+      "license_status": "Apache-2.0",
+      "path": "docs/limitations.md",
+      "public_safe_decision": "pass-deterministic-only",
+      "reason": "public-safe candidate; human semantic review remains required",
+      "reviewer_status": "pending-semantic-review",
+      "sha256": "903ae977d6e3a0baa5b9dab48a1587624baef07a136a85dabe412239b4a207d4"
+    },
+    {
+      "classification": "documentation",
+      "license_status": "Apache-2.0",
+      "path": "docs/privacy-model.md",
+      "public_safe_decision": "pass-deterministic-only",
+      "reason": "public-safe candidate; human semantic review remains required",
+      "reviewer_status": "pending-semantic-review",
+      "sha256": "ab7d1c2096a960d66771464e730ccdf0be4909002850d3d1c8d8aa41910c74e6"
+    },
+    {
+      "classification": "documentation",
+      "license_status": "Apache-2.0",
+      "path": "docs/promotion-package.md",
+      "public_safe_decision": "pass-deterministic-only",
+      "reason": "public-safe candidate; human semantic review remains required",
+      "reviewer_status": "pending-semantic-review",
+      "sha256": "dc266252a43e58d427381894bd3871090fe1a673e5a7b6ef381516bfa0e51ffc"
+    },
+    {
+      "classification": "documentation",
+      "license_status": "Apache-2.0",
+      "path": "docs/provider-qualification.md",
+      "public_safe_decision": "pass-deterministic-only",
+      "reason": "public-safe candidate; human semantic review remains required",
+      "reviewer_status": "pending-semantic-review",
+      "sha256": "d9abc5cf02f8077a78c0f8f34637b106f07803f0fb4ff4d31863e67c69e3b9a6"
+    },
+    {
+      "classification": "documentation",
+      "license_status": "Apache-2.0",
+      "path": "docs/provider-registry.json",
+      "public_safe_decision": "pass-deterministic-only",
+      "reason": "public-safe candidate; human semantic review remains required",
+      "reviewer_status": "pending-semantic-review",
+      "sha256": "a505a7bc7e4940abaf1a76e7ee0aad2760fe4084a85bbbc0565961e25a9d2d3a"
+    },
+    {
+      "classification": "documentation",
+      "license_status": "Apache-2.0",
+      "path": "docs/public-inclusion-exclusion.md",
+      "public_safe_decision": "pass-deterministic-only",
+      "reason": "public-safe candidate; human semantic review remains required",
+      "reviewer_status": "pending-semantic-review",
+      "sha256": "1c2cb86a365d90169cb5941bf28702ce68047325ac377871a2cca0cf71a8256b"
+    },
+    {
+      "classification": "documentation",
+      "license_status": "Apache-2.0",
+      "path": "docs/research-credit-application-master.md",
+      "public_safe_decision": "pass-deterministic-only",
+      "reason": "public-safe candidate; human semantic review remains required",
+      "reviewer_status": "pending-semantic-review",
+      "sha256": "563ab50be93eadcaa22f4d27e6c5a95172ae04efdf9c9d846c36b8cde6ff95cb"
+    },
+    {
+      "classification": "documentation",
+      "license_status": "Apache-2.0",
+      "path": "docs/research-roadmap.md",
+      "public_safe_decision": "pass-deterministic-only",
+      "reason": "public-safe candidate; human semantic review remains required",
+      "reviewer_status": "pending-semantic-review",
+      "sha256": "3d8806a3b151dfa22bbb6852b22622f021880078e39920724b728f4218da0dc5"
+    },
+    {
+      "classification": "documentation",
+      "license_status": "Apache-2.0",
+      "path": "docs/thirty-day-tracker.md",
+      "public_safe_decision": "pass-deterministic-only",
+      "reason": "public-safe candidate; human semantic review remains required",
+      "reviewer_status": "pending-semantic-review",
+      "sha256": "8050c78f96a794a0f7e7a172047809782737795260aad8a8825ef5430ba8bb02"
+    },
+    {
+      "classification": "project-metadata",
+      "license_status": "Apache-2.0",
+      "path": "examples/cad-script/README.md",
+      "public_safe_decision": "pass-deterministic-only",
+      "reason": "public-safe candidate; human semantic review remains required",
+      "reviewer_status": "pending-semantic-review",
+      "sha256": "68215d2fdbf6758d5bcf3fe380d825d6f7ad7018658a9327d0d90cba4ddafe3a"
+    },
+    {
+      "classification": "project-metadata",
+      "license_status": "Apache-2.0",
+      "path": "examples/coding/README.md",
+      "public_safe_decision": "pass-deterministic-only",
+      "reason": "public-safe candidate; human semantic review remains required",
+      "reviewer_status": "pending-semantic-review",
+      "sha256": "0a3ca08a6f8216b3ebe56438cff91be76e9510777a5b04d0021b459471df1476"
+    },
+    {
+      "classification": "project-metadata",
+      "license_status": "Apache-2.0",
+      "path": "examples/data-transform/README.md",
+      "public_safe_decision": "pass-deterministic-only",
+      "reason": "public-safe candidate; human semantic review remains required",
+      "reviewer_status": "pending-semantic-review",
+      "sha256": "a14c772c8f0fc297631ff40a355b257d9d659cc8aa9ff5302f3e32598c07fdd7"
+    },
+    {
+      "classification": "project-metadata",
+      "license_status": "Apache-2.0",
+      "path": "examples/figure-qa/README.md",
+      "public_safe_decision": "pass-deterministic-only",
+      "reason": "public-safe candidate; human semantic review remains required",
+      "reviewer_status": "pending-semantic-review",
+      "sha256": "10fd23ddf489f789ca70d5f521ac7dbd51fa03cbb728960b51bfdec8ed2126e7"
+    },
+    {
+      "classification": "project-metadata",
+      "license_status": "Apache-2.0",
+      "path": "pyproject.toml",
+      "public_safe_decision": "pass-deterministic-only",
+      "reason": "public-safe candidate; human semantic review remains required",
+      "reviewer_status": "pending-semantic-review",
+      "sha256": "609b47ba4d5c7f18710346fb43d2769171d5178c040199d4a69ef3b9ee071a86"
+    },
+    {
+      "classification": "schema",
+      "license_status": "Apache-2.0",
+      "path": "schemas/result.schema.json",
+      "public_safe_decision": "pass-deterministic-only",
+      "reason": "public-safe candidate; human semantic review remains required",
+      "reviewer_status": "pending-semantic-review",
+      "sha256": "98709caac3992ad80204fa05ea8fd1950eac16056f82ec2a5d13b185967ede6c"
+    },
+    {
+      "classification": "schema",
+      "license_status": "Apache-2.0",
+      "path": "schemas/review-bundle.schema.json",
+      "public_safe_decision": "pass-deterministic-only",
+      "reason": "public-safe candidate; human semantic review remains required",
+      "reviewer_status": "pending-semantic-review",
+      "sha256": "6f10781dda181ddcd23890c7b5dc019076a3ced03f070f8c5274259d2598fcfa"
+    },
+    {
+      "classification": "schema",
+      "license_status": "Apache-2.0",
+      "path": "schemas/work-order.schema.json",
+      "public_safe_decision": "pass-deterministic-only",
+      "reason": "public-safe candidate; human semantic review remains required",
+      "reviewer_status": "pending-semantic-review",
+      "sha256": "998904d784b7155658ec5798448d9f37040731ba8e01d2d3205d3ea1fd6fc4af"
+    },
+    {
+      "classification": "qa-script",
+      "license_status": "Apache-2.0",
+      "path": "scripts/build_review_bundle.py",
+      "public_safe_decision": "pass-deterministic-only",
+      "reason": "public-safe candidate; human semantic review remains required",
+      "reviewer_status": "pending-semantic-review",
+      "sha256": "065a176d81846410e80a3d97d86660b14ce75689c93619e874cb7066bd5855b4"
+    },
+    {
+      "classification": "qa-script",
+      "license_status": "Apache-2.0",
+      "path": "scripts/fresh_clone_smoke.py",
+      "public_safe_decision": "pass-deterministic-only",
+      "reason": "public-safe candidate; human semantic review remains required",
+      "reviewer_status": "pending-semantic-review",
+      "sha256": "45d560c296a91fd0f8c3aad1ff392699c472fd310679089a23c97e8be7fca61a"
+    },
+    {
+      "classification": "qa-script",
+      "license_status": "Apache-2.0",
+      "path": "scripts/run_static_qa.py",
+      "public_safe_decision": "pass-deterministic-only",
+      "reason": "public-safe candidate; human semantic review remains required",
+      "reviewer_status": "pending-semantic-review",
+      "sha256": "38a72ebd41518035847752ea2e4493f23ce9f64f0179cdc1798b605b03465a2b"
+    },
+    {
+      "classification": "qa-script",
+      "license_status": "Apache-2.0",
+      "path": "scripts/run_synthetic_benchmark.py",
+      "public_safe_decision": "pass-deterministic-only",
+      "reason": "public-safe candidate; human semantic review remains required",
+      "reviewer_status": "pending-semantic-review",
+      "sha256": "ac41dededd3d0d60a8ae2c07fbfb8755ba990a4786315ac108b3538d2a2cec51"
+    },
+    {
+      "classification": "qa-script",
+      "license_status": "Apache-2.0",
+      "path": "scripts/scan_publication_boundary.py",
+      "public_safe_decision": "pass-deterministic-only",
+      "reason": "public-safe candidate; human semantic review remains required",
+      "reviewer_status": "pending-semantic-review",
+      "sha256": "01a08efd07dc4ad85615c7c458c1e4f130c2affbd6cd37783e89d3247c90ddd8"
+    },
+    {
+      "classification": "project-file",
+      "license_status": "Apache-2.0",
+      "path": "setup.py",
+      "public_safe_decision": "pass-deterministic-only",
+      "reason": "public-safe candidate; human semantic review remains required",
+      "reviewer_status": "pending-semantic-review",
+      "sha256": "a53e41ad1606d498f652d991f2f68e4a8fe77fcb0edb04ceeb0536347b61f290"
+    },
+    {
+      "classification": "source-code",
+      "license_status": "Apache-2.0",
+      "path": "src/scientific_llm_orchestrator/__init__.py",
+      "public_safe_decision": "pass-deterministic-only",
+      "reason": "public-safe candidate; human semantic review remains required",
+      "reviewer_status": "pending-semantic-review",
+      "sha256": "860273135fa667dc040f2413462dfaab6396232c15ae7c6ef025b3f9d58f387f"
+    },
+    {
+      "classification": "source-code",
+      "license_status": "Apache-2.0",
+      "path": "src/scientific_llm_orchestrator/contracts/__init__.py",
+      "public_safe_decision": "pass-deterministic-only",
+      "reason": "public-safe candidate; human semantic review remains required",
+      "reviewer_status": "pending-semantic-review",
+      "sha256": "4dfe2a910c8a3167bc51d23c50f5445a3425ddffa09cf09ef430c1fe55d6d500"
+    },
+    {
+      "classification": "source-code",
+      "license_status": "Apache-2.0",
+      "path": "src/scientific_llm_orchestrator/contracts/models.py",
+      "public_safe_decision": "pass-deterministic-only",
+      "reason": "public-safe candidate; human semantic review remains required",
+      "reviewer_status": "pending-semantic-review",
+      "sha256": "5159e4880f9b54acab0dbddcf38059578841b8ab4aa0d62af5a9c645ebf4fc10"
+    },
+    {
+      "classification": "source-code",
+      "license_status": "Apache-2.0",
+      "path": "src/scientific_llm_orchestrator/metrics/__init__.py",
+      "public_safe_decision": "pass-deterministic-only",
+      "reason": "public-safe candidate; human semantic review remains required",
+      "reviewer_status": "pending-semantic-review",
+      "sha256": "0d60d6eec5455f7853ea0b72a0ba30c9d55c4e8cbabbd3dd8582cc95387e9bc3"
+    },
+    {
+      "classification": "source-code",
+      "license_status": "Apache-2.0",
+      "path": "src/scientific_llm_orchestrator/metrics/sanitized.py",
+      "public_safe_decision": "pass-deterministic-only",
+      "reason": "public-safe candidate; human semantic review remains required",
+      "reviewer_status": "pending-semantic-review",
+      "sha256": "d36492b3c862da1b07cd099a7305045fe0721fc7077ab924c01437c8e1b0c306"
+    },
+    {
+      "classification": "source-code",
+      "license_status": "Apache-2.0",
+      "path": "src/scientific_llm_orchestrator/providers/__init__.py",
+      "public_safe_decision": "pass-deterministic-only",
+      "reason": "public-safe candidate; human semantic review remains required",
+      "reviewer_status": "pending-semantic-review",
+      "sha256": "a10f141e833ba714a15059c6a1a8065532f59f368700b3e04d9cd0faa0dc6404"
+    },
+    {
+      "classification": "source-code",
+      "license_status": "Apache-2.0",
+      "path": "src/scientific_llm_orchestrator/providers/dry_run.py",
+      "public_safe_decision": "pass-deterministic-only",
+      "reason": "public-safe candidate; human semantic review remains required",
+      "reviewer_status": "pending-semantic-review",
+      "sha256": "15a0725376d681d7a3b1f37a88c33bff32540c92d6811ef153ac81209db78fd7"
+    },
+    {
+      "classification": "source-code",
+      "license_status": "Apache-2.0",
+      "path": "src/scientific_llm_orchestrator/routing/__init__.py",
+      "public_safe_decision": "pass-deterministic-only",
+      "reason": "public-safe candidate; human semantic review remains required",
+      "reviewer_status": "pending-semantic-review",
+      "sha256": "c59733a86d06ac49da9904912f0b4a3ad95cad32f58952312e95551e5a779093"
+    },
+    {
+      "classification": "source-code",
+      "license_status": "Apache-2.0",
+      "path": "src/scientific_llm_orchestrator/routing/router.py",
+      "public_safe_decision": "pass-deterministic-only",
+      "reason": "public-safe candidate; human semantic review remains required",
+      "reviewer_status": "pending-semantic-review",
+      "sha256": "47040011fb891d94a2114a2f3748caff250673425c4a545b6083f43a9229ef4f"
+    },
+    {
+      "classification": "source-code",
+      "license_status": "Apache-2.0",
+      "path": "src/scientific_llm_orchestrator/validators/__init__.py",
+      "public_safe_decision": "pass-deterministic-only",
+      "reason": "public-safe candidate; human semantic review remains required",
+      "reviewer_status": "pending-semantic-review",
+      "sha256": "4b18abcf116a30f8da8d7e842c154debcbcc797a614aefbb48f99e53dea09d2b"
+    },
+    {
+      "classification": "source-code",
+      "license_status": "Apache-2.0",
+      "path": "src/scientific_llm_orchestrator/validators/deterministic.py",
+      "public_safe_decision": "pass-deterministic-only",
+      "reason": "public-safe candidate; human semantic review remains required",
+      "reviewer_status": "pending-semantic-review",
+      "sha256": "da2717d00d161dc7739cab819af557fd80e8f15f99be145fb838e69336118fdf"
+    },
+    {
+      "classification": "source-code",
+      "license_status": "Apache-2.0",
+      "path": "src/scientific_llm_orchestrator/validators/schema_subset.py",
+      "public_safe_decision": "pass-deterministic-only",
+      "reason": "public-safe candidate; human semantic review remains required",
+      "reviewer_status": "pending-semantic-review",
+      "sha256": "752640526e89b2a1ca93c11f35f289b146444d9ebae63329786e7e7b9a074a80"
+    },
+    {
+      "classification": "test-code",
+      "license_status": "Apache-2.0",
+      "path": "tests/test_contracts.py",
+      "public_safe_decision": "pass-deterministic-only",
+      "reason": "public-safe candidate; human semantic review remains required",
+      "reviewer_status": "pending-semantic-review",
+      "sha256": "539e0192a6d5759ab330fc56656f4aeb01dee2e96b96815730be16d17bad566b"
+    },
+    {
+      "classification": "test-code",
+      "license_status": "Apache-2.0",
+      "path": "tests/test_public_surface.py",
+      "public_safe_decision": "pass-deterministic-only",
+      "reason": "public-safe candidate; human semantic review remains required",
+      "reviewer_status": "pending-semantic-review",
+      "sha256": "2dece88b6a6ea4a1e6c6013dee3d76e1ebee3796c7c09eec9ba8cf527507023c"
+    },
+    {
+      "classification": "test-code",
+      "license_status": "Apache-2.0",
+      "path": "tests/test_publication_scan.py",
+      "public_safe_decision": "pass-deterministic-only",
+      "reason": "public-safe candidate; human semantic review remains required",
+      "reviewer_status": "pending-semantic-review",
+      "sha256": "3f34302a03fef1a54be93875c82719019602e6b520c56b27a254e904a9cc3ff8"
+    },
+    {
+      "classification": "test-code",
+      "license_status": "Apache-2.0",
+      "path": "tests/test_routing.py",
+      "public_safe_decision": "pass-deterministic-only",
+      "reason": "public-safe candidate; human semantic review remains required",
+      "reviewer_status": "pending-semantic-review",
+      "sha256": "6d01fd5659837ea3cf6ba649d8b966a5fff035b863c0d12a22d2db8f42f5acf4"
+    },
+    {
+      "classification": "test-code",
+      "license_status": "Apache-2.0",
+      "path": "tests/test_schema_subset.py",
+      "public_safe_decision": "pass-deterministic-only",
+      "reason": "public-safe candidate; human semantic review remains required",
+      "reviewer_status": "pending-semantic-review",
+      "sha256": "de7103bba609e82341a0eb0afb1b4f086123f5b9a4f17400dce5c3012793f9a8"
+    },
+    {
+      "classification": "test-code",
+      "license_status": "Apache-2.0",
+      "path": "tests/test_validators.py",
+      "public_safe_decision": "pass-deterministic-only",
+      "reason": "public-safe candidate; human semantic review remains required",
+      "reviewer_status": "pending-semantic-review",
+      "sha256": "776abae2a97c17347eb7d0e0a6b22035128f969484fa9d3458539fe94a7e0475"
+    }
+  ],
+  "excluded_generated_outputs": [
+    "review-bundle.json"
+  ],
+  "manifest_sha256": null,
+  "manifest_version": "1.0",
+  "self_hash_policy": "excluded-from-entries"
+}

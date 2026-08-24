@@ -1,0 +1,9 @@
+{
+  "fixture_id": "visual-scale-bar",
+  "task_class": "visual_figure_qa",
+  "operation": "axis_legend_scale_bar_check",
+  "public_safe": true,
+  "input": {"axis": "distance (um)", "legend_entries": ["control", "test"], "scale_bar": "10 um"},
+  "protected_literals": ["distance (um)", "10 um"],
+  "expected": {"axis_present": true, "legend_count": 2, "scale_bar_present": true}
+}

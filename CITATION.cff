@@ -1,0 +1,11 @@
+cff-version: 1.2.0
+title: "Scientific LLM Orchestrator"
+message: "Please cite the research prototype and record the version used."
+type: software
+version: 0.1.0
+license: Apache-2.0
+abstract: >-
+  Evidence-gated routing of frontier, hosted-open, and local language models
+  for bounded scientific software engineering tasks.
+authors:
+  - name: "scientific-llm-orchestrator contributors"

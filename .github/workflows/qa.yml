@@ -1,0 +1,25 @@
+name: offline-public-qa
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  qa:
+    runs-on: ubuntu-latest
+    steps:
+      # The platform checkout is repository transport; no provider network call is made.
+      - uses: actions/checkout@v4
+      - name: Diff check
+        run: git diff --check
+      - name: Compile and unit tests
+        run: |
+          python -m unittest discover -s tests -v
+      - name: Static QA
+        run: python scripts/run_static_qa.py --root .
+      - name: Synthetic benchmark
+        run: python scripts/run_synthetic_benchmark.py --root .
+      - name: Publication boundary
+        run: python scripts/scan_publication_boundary.py --root .
+      - name: Fresh clone smoke
+        run: python scripts/fresh_clone_smoke.py --root .

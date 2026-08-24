@@ -1,0 +1,9 @@
+{
+  "fixture_id": "cad-bracket",
+  "task_class": "parametric_cad",
+  "operation": "parametric_clearance_check",
+  "public_safe": true,
+  "input": {"width_mm": 40, "depth_mm": 30, "height_mm": 10, "wall_mm": 3, "clearance_mm": 1},
+  "protected_literals": ["width_mm", "depth_mm", "clearance_mm"],
+  "expected": {"bounding_box_mm": [40, 30, 10], "outer_volume_mm3": 12000, "inner_volume_mm3": 3264, "wall_thickness_mm": 3, "clearance_mm": 1}
+}

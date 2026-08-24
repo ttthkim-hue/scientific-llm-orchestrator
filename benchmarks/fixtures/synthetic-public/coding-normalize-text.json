@@ -1,0 +1,9 @@
+{
+  "fixture_id": "coding-normalize-text",
+  "task_class": "coding",
+  "operation": "implement_function",
+  "public_safe": true,
+  "input": {"function_name": "normalize_text", "value": "  A   B  "},
+  "protected_literals": ["normalize_text"],
+  "expected": {"function_name": "normalize_text", "normalized": "A B"}
+}

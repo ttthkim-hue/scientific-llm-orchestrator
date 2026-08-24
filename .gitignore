@@ -1,0 +1,7 @@
+__pycache__/
+*.py[cod]
+build/
+dist/
+*.egg-info/
+# Local generated receipt; the publication scanner excludes this exact output.
+review-bundle.json

@@ -1,0 +1,9 @@
+{
+  "fixture_id": "cad-open-box",
+  "task_class": "parametric_cad",
+  "operation": "parametric_geometry_check",
+  "public_safe": true,
+  "input": {"width_mm": 100, "depth_mm": 80, "height_mm": 20, "wall_mm": 2, "clearance_mm": 5},
+  "protected_literals": ["width_mm", "wall_mm", "clearance_mm"],
+  "expected": {"bounding_box_mm": [100, 80, 20], "outer_volume_mm3": 160000, "inner_volume_mm3": 116736, "wall_thickness_mm": 2, "clearance_mm": 5}
+}

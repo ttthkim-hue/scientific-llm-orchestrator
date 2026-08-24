@@ -1,0 +1,12 @@
+{
+  "bindings_version": "1.0",
+  "mode": "dry-run",
+  "credentials_required": false,
+  "providers": {
+    "frontier": {"adapter": "unconfigured", "status": "not-run"},
+    "hosted_worker": {"adapter": "unconfigured", "status": "not-run"},
+    "local_worker": {"adapter": "unconfigured", "status": "not-run"}
+  },
+  "privacy_rule": "Only public or public-synthetic fixtures may be sent to a future provider adapter.",
+  "automatic_apply": false
+}

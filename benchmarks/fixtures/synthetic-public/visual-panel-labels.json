@@ -1,0 +1,9 @@
+{
+  "fixture_id": "visual-panel-labels",
+  "task_class": "visual_figure_qa",
+  "operation": "multi_panel_label_inventory",
+  "public_safe": true,
+  "input": {"panels": ["b", "a", "c"], "axis_labels": ["x (mm)", "intensity (a.u.)"], "legend": "synthetic series"},
+  "protected_literals": ["x (mm)", "intensity (a.u.)"],
+  "expected": {"panel_count": 3, "panel_labels_sorted": ["a", "b", "c"], "axis_label_count": 2, "legend_present": true}
+}

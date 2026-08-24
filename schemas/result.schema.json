@@ -1,0 +1,34 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:scientific-llm-orchestrator:schema:result:1.0",
+  "title": "Scientific LLM Orchestrator Result",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["contract_version", "work_order_id", "route", "status", "evidence_label", "provider", "dry_run", "automatic_apply", "protected_literals_preserved", "validation_results", "authority_flags"],
+  "properties": {
+    "contract_version": {"const": "1.0"},
+    "work_order_id": {"type": "string"},
+    "route": {"enum": ["frontier", "hosted_worker", "local_worker", "blocked"]},
+    "status": {"type": "string"},
+    "evidence_label": {"enum": ["observed-real-model", "observed-deterministic", "observed-mock-runtime", "vendor-reported", "inferred", "proposed", "not-run"]},
+    "provider": {"type": "string"},
+    "dry_run": {"type": "boolean"},
+    "automatic_apply": {"const": false},
+    "protected_literals_preserved": {"type": ["boolean", "null"]},
+    "validation_results": {"type": "object", "additionalProperties": {"type": "boolean"}},
+    "proposal_summary": {"type": "string"},
+    "route_reason": {"type": "string"},
+    "authority_flags": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["scientific", "citation", "security", "canonical", "release"],
+      "properties": {
+        "scientific": {"const": true},
+        "citation": {"const": true},
+        "security": {"const": true},
+        "canonical": {"const": true},
+        "release": {"const": true}
+      }
+    }
+  }
+}

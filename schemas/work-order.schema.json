@@ -1,0 +1,33 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:scientific-llm-orchestrator:schema:work-order:1.0",
+  "title": "Scientific LLM Orchestrator Work Order",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["contract_version", "work_order_id", "task_class", "operation", "objective", "architecture", "allowed_paths", "protected_literals", "validation_ids", "authority_flags", "automatic_apply"],
+  "properties": {
+    "contract_version": {"const": "1.0"},
+    "work_order_id": {"type": "string", "pattern": "^[A-Za-z0-9_-]+$"},
+    "task_class": {"enum": ["coding", "data_scientific_mechanics", "visual_figure_qa", "parametric_cad"]},
+    "operation": {"type": "string", "minLength": 1},
+    "objective": {"type": "string", "minLength": 1},
+    "architecture": {"enum": ["FRONTIER_ONLY", "FRONTIER_HOSTED_WORKER", "FRONTIER_LOCAL_WORKER", "FRONTIER_LOCAL_THEN_HOSTED_RESIDUAL"]},
+    "allowed_paths": {"type": "array", "items": {"type": "string", "minLength": 1}, "minItems": 1},
+    "protected_literals": {"type": "array", "items": {"type": "string"}},
+    "validation_ids": {"type": "array", "items": {"type": "string"}, "minItems": 1},
+    "privacy_class": {"type": "string", "enum": ["public", "public-synthetic"]},
+    "automatic_apply": {"const": false},
+    "authority_flags": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["scientific", "citation", "security", "canonical", "release"],
+      "properties": {
+        "scientific": {"const": true},
+        "citation": {"const": true},
+        "security": {"const": true},
+        "canonical": {"const": true},
+        "release": {"const": true}
+      }
+    }
+  }
+}

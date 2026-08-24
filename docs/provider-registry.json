@@ -1,0 +1,23 @@
+{
+  "registry_version": "1.0",
+  "status": "not-run",
+  "terms_checked_date": null,
+  "entries": [],
+  "entry_fields": [
+    "provider_name",
+    "official_program_url",
+    "terms_checked_date",
+    "eligibility",
+    "credit_or_quota",
+    "expiry",
+    "model_or_hardware",
+    "region_restrictions",
+    "data_retention_and_training",
+    "publication_constraints",
+    "credential_status",
+    "application_status",
+    "next_action",
+    "evidence_link"
+  ],
+  "reason": "Provider terms were not checked in this offline clean-room build; no provider was contacted and no credential is stored."
+}

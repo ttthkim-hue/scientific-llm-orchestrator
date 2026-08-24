@@ -1,0 +1,27 @@
+{
+  "policy_version": "1.0",
+  "default_architecture": "FRONTIER_LOCAL_THEN_HOSTED_RESIDUAL",
+  "architectures": [
+    "FRONTIER_ONLY",
+    "FRONTIER_HOSTED_WORKER",
+    "FRONTIER_LOCAL_WORKER",
+    "FRONTIER_LOCAL_THEN_HOSTED_RESIDUAL"
+  ],
+  "authority_flags": {
+    "scientific": true,
+    "citation": true,
+    "security": true,
+    "canonical": true,
+    "release": true
+  },
+  "automatic_apply": false,
+  "evidence_labels": [
+    "observed-real-model",
+    "observed-deterministic",
+    "observed-mock-runtime",
+    "vendor-reported",
+    "inferred",
+    "proposed",
+    "not-run"
+  ]
+}

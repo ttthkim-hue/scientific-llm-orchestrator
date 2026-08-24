@@ -1,0 +1,15 @@
+{
+  "fixture_id": "data-log-summary",
+  "task_class": "data_scientific_mechanics",
+  "operation": "simulation_log_compression",
+  "public_safe": true,
+  "input": {
+    "events": [
+      {"step": 1, "level": "INFO"},
+      {"step": 2, "level": "INFO"},
+      {"step": 3, "level": "WARN"}
+    ]
+  },
+  "protected_literals": ["INFO", "WARN"],
+  "expected": {"event_count": 3, "levels": {"INFO": 2, "WARN": 1}, "root_cause_claim": null}
+}

@@ -1,0 +1,10 @@
+{
+  "coding-normalize-text": {"function_name": "normalize_text", "normalized": "A B"},
+  "coding-safe-ratio": {"function_name": "safe_ratio", "value": 3.0},
+  "data-schema-units": {"header_count": 3, "row_count": 1, "units_complete": true, "normalized_headers": ["sample_id", "mass_g", "time_s"]},
+  "data-log-summary": {"event_count": 3, "levels": {"INFO": 2, "WARN": 1}, "root_cause_claim": null},
+  "visual-panel-labels": {"panel_count": 3, "panel_labels_sorted": ["a", "b", "c"], "axis_label_count": 2, "legend_present": true},
+  "visual-scale-bar": {"axis_present": true, "legend_count": 2, "scale_bar_present": true},
+  "cad-open-box": {"bounding_box_mm": [100, 80, 20], "outer_volume_mm3": 160000, "inner_volume_mm3": 116736, "wall_thickness_mm": 2, "clearance_mm": 5},
+  "cad-bracket": {"bounding_box_mm": [40, 30, 10], "outer_volume_mm3": 12000, "inner_volume_mm3": 3264, "wall_thickness_mm": 3, "clearance_mm": 1}
+}

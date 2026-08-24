@@ -1,0 +1,17 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:scientific-llm-orchestrator:schema:review-bundle:1.0",
+  "title": "Scientific LLM Orchestrator Review Bundle",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["contract_version", "bundle_id", "results", "metrics", "evidence_label", "semantic_review_status", "automatic_apply"],
+  "properties": {
+    "contract_version": {"const": "1.0"},
+    "bundle_id": {"type": "string"},
+    "results": {"type": "array", "items": {"type": "object"}},
+    "metrics": {"type": "object"},
+    "evidence_label": {"enum": ["observed-real-model", "observed-deterministic", "observed-mock-runtime", "vendor-reported", "inferred", "proposed", "not-run"]},
+    "semantic_review_status": {"type": "string", "const": "pending-human-review"},
+    "automatic_apply": {"const": false}
+  }
+}

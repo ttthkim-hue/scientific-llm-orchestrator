@@ -1,0 +1,13 @@
+{
+  "fixture_id": "data-schema-units",
+  "task_class": "data_scientific_mechanics",
+  "operation": "csv_schema_unit_audit",
+  "public_safe": true,
+  "input": {
+    "headers": ["sample_id", "mass_g", "time_s"],
+    "rows": [{"sample_id": "s1", "mass_g": 1.5, "time_s": 2.0}],
+    "units": {"mass_g": "g", "time_s": "s"}
+  },
+  "protected_literals": ["sample_id", "mass_g", "time_s"],
+  "expected": {"header_count": 3, "row_count": 1, "units_complete": true, "normalized_headers": ["sample_id", "mass_g", "time_s"]}
+}

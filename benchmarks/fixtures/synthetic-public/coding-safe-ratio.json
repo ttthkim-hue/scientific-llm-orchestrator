@@ -1,0 +1,9 @@
+{
+  "fixture_id": "coding-safe-ratio",
+  "task_class": "coding",
+  "operation": "repair_deterministic_bug",
+  "public_safe": true,
+  "input": {"function_name": "safe_ratio", "numerator": 9, "denominator": 3},
+  "protected_literals": ["safe_ratio"],
+  "expected": {"function_name": "safe_ratio", "value": 3.0}
+}
