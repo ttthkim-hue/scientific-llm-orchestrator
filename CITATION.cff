@@ -4,8 +4,11 @@ message: "Please cite the research prototype and record the version used."
 type: software
 version: 0.1.0
 license: Apache-2.0
+repository-code: "https://github.com/ttthkim-hue/scientific-llm-orchestrator"
 abstract: >-
   Evidence-gated routing of frontier, hosted-open, and local language models
   for bounded scientific software engineering tasks.
 authors:
-  - name: "scientific-llm-orchestrator contributors"
+  - family-names: "Kim"
+    given-names: "Tae-hyung"
+    affiliation: "Korea Institute of Limestone and Advanced Materials"

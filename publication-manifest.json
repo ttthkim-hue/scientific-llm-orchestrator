@@ -49,7 +49,7 @@
       "public_safe_decision": "pass-deterministic-only",
       "reason": "public-safe candidate; human semantic review remains required",
       "reviewer_status": "pending-semantic-review",
-      "sha256": "2cd6af767eacb80b19ab95eceb634683ccdf963a1a8e893dcf7c388af8bf040c"
+      "sha256": "1b5e53fa40be27f52eccf016fe4a5e93993684526af43f83c37e96f341aa78c4"
     },
     {
       "classification": "project-metadata",
