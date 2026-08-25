@@ -1,25 +1,49 @@
 name: offline-public-qa
 
+# Credential-free public QA. No model APIs, provider SDKs, or extra network
+# services. The job fails if any listed check returns non-zero.
 on:
   push:
   pull_request:
 
+permissions:
+  contents: read
+
 jobs:
   qa:
     runs-on: ubuntu-latest
+    timeout-minutes: 15
     steps:
       # The platform checkout is repository transport; no provider network call is made.
       - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Require Python 3.10+
+        run: python3 -c "import sys; raise SystemExit(0 if sys.version_info >= (3, 10) else 1)"
       - name: Diff check
         run: git diff --check
       - name: Compile and unit tests
-        run: |
-          python -m unittest discover -s tests -v
+        env:
+          GITHUB_TOKEN: ""
+          GH_TOKEN: ""
+        run: python -m unittest discover -s tests -v
       - name: Static QA
+        env:
+          GITHUB_TOKEN: ""
+          GH_TOKEN: ""
         run: python scripts/run_static_qa.py --root .
       - name: Synthetic benchmark
+        env:
+          GITHUB_TOKEN: ""
+          GH_TOKEN: ""
         run: python scripts/run_synthetic_benchmark.py --root .
       - name: Publication boundary
+        env:
+          GITHUB_TOKEN: ""
+          GH_TOKEN: ""
         run: python scripts/scan_publication_boundary.py --root .
       - name: Fresh clone smoke
+        env:
+          GITHUB_TOKEN: ""
+          GH_TOKEN: ""
         run: python scripts/fresh_clone_smoke.py --root .

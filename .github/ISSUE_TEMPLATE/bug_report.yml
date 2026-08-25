@@ -1,0 +1,59 @@
+name: Bug report
+description: Report a public, credential-free defect in contracts, routing, validators, docs, or offline QA.
+title: "[Bug]: "
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        This repository is an Apache-2.0 research prototype. Do not paste credentials, provider secrets, unpublished research, local absolute paths, raw prompts, or raw responses.
+
+        `automatic_apply` stays false. Evidence labels must stay honest (`observed-deterministic` versus `not-run`).
+  - type: textarea
+    id: summary
+    attributes:
+      label: Summary
+      description: What broke, in public-safe language.
+    validations:
+      required: true
+  - type: textarea
+    id: reproduce
+    attributes:
+      label: Offline reproduction
+      description: Commands from this repository only. Prefer `python scripts/run_static_qa.py --root .`, `python scripts/run_synthetic_benchmark.py --root .`, or `python scripts/scan_publication_boundary.py --root .`.
+      placeholder: python scripts/run_static_qa.py --root .
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected behavior
+    validations:
+      required: true
+  - type: textarea
+    id: actual
+    attributes:
+      label: Actual behavior
+      description: Quote public logs or file paths. Do not attach raw model I/O or secrets.
+    validations:
+      required: true
+  - type: dropdown
+    id: evidence
+    attributes:
+      label: Evidence status of this report
+      options:
+        - observed-deterministic (reproduced with in-repo offline checks)
+        - observed-mock-runtime
+        - not-run / not reproduced
+        - proposed
+    validations:
+      required: true
+  - type: checkboxes
+    id: boundary
+    attributes:
+      label: Authority and privacy
+      options:
+        - label: This report contains only public or public-synthetic material.
+          required: true
+        - label: I am not asking to enable automatic_apply, add provider credentials, or claim actual-model performance.
+          required: true

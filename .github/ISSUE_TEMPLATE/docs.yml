@@ -1,0 +1,49 @@
+name: Documentation
+description: Report a docs gap or inaccuracy without changing product routing logic.
+title: "[Docs]: "
+labels: ["documentation"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Use this template for README, `docs/`, comments, or citation/security wording. Keep the authority and privacy boundary intact: no credentials, local paths, provider prices, raw model I/O, or actual-model performance claims.
+  - type: input
+    id: path
+    attributes:
+      label: Document path
+      description: Repository-relative path, such as `README.md` or `docs/privacy-model.md`.
+      placeholder: docs/limitations.md
+    validations:
+      required: true
+  - type: textarea
+    id: problem
+    attributes:
+      label: What is missing or inaccurate
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Suggested wording or structure
+      description: Optional. Keep evidence labels honest (`observed-deterministic` versus `not-run`).
+    validations:
+      required: false
+  - type: dropdown
+    id: change_kind
+    attributes:
+      label: Change kind
+      options:
+        - docs
+        - process
+        - code (docs change also requires a code update)
+    validations:
+      required: true
+  - type: checkboxes
+    id: boundary
+    attributes:
+      label: Authority and privacy
+      options:
+        - label: The proposed docs change does not add credentials, provider bindings, prices, local paths, raw model I/O, or actual-model claims.
+          required: true
+        - label: The proposed docs change does not weaken `automatic_apply=false` or frontier scientific/citation/security/canonical/release authority.
+          required: true

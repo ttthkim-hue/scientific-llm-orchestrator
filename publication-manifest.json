@@ -18,11 +18,56 @@
     {
       "classification": "ci-configuration",
       "license_status": "Apache-2.0",
+      "path": ".github/ISSUE_TEMPLATE/bug_report.yml",
+      "public_safe_decision": "pass-deterministic-only",
+      "reason": "public-safe candidate; human semantic review remains required",
+      "reviewer_status": "pending-semantic-review",
+      "sha256": "3798ee5d2a6f5e0c08920ad77a6e3533984172d05cba9325ece5414d8d0b4e97"
+    },
+    {
+      "classification": "ci-configuration",
+      "license_status": "Apache-2.0",
+      "path": ".github/ISSUE_TEMPLATE/config.yml",
+      "public_safe_decision": "pass-deterministic-only",
+      "reason": "public-safe candidate; human semantic review remains required",
+      "reviewer_status": "pending-semantic-review",
+      "sha256": "8f72776d708904a87c43af8a1d9389975c8e91f8c3efce1ad0d45c05ddd0267e"
+    },
+    {
+      "classification": "ci-configuration",
+      "license_status": "Apache-2.0",
+      "path": ".github/ISSUE_TEMPLATE/docs.yml",
+      "public_safe_decision": "pass-deterministic-only",
+      "reason": "public-safe candidate; human semantic review remains required",
+      "reviewer_status": "pending-semantic-review",
+      "sha256": "a1f146e9b0fee1469bea7d470647416b9d434803db6de1c77958eeb4ce81f285"
+    },
+    {
+      "classification": "ci-configuration",
+      "license_status": "Apache-2.0",
+      "path": ".github/ISSUE_TEMPLATE/inbound_feedback.yml",
+      "public_safe_decision": "pass-deterministic-only",
+      "reason": "public-safe candidate; human semantic review remains required",
+      "reviewer_status": "pending-semantic-review",
+      "sha256": "4b18b3f05e1fe0c6f913bbf41e51d9e3b806edae2bb360f7e029b45b30b919f9"
+    },
+    {
+      "classification": "ci-configuration",
+      "license_status": "Apache-2.0",
+      "path": ".github/labels.yml",
+      "public_safe_decision": "pass-deterministic-only",
+      "reason": "public-safe candidate; human semantic review remains required",
+      "reviewer_status": "pending-semantic-review",
+      "sha256": "c4f7a488e51eb96332a89a5593fc14a6c6af120ccf30bf3f394c69f23871fd42"
+    },
+    {
+      "classification": "ci-configuration",
+      "license_status": "Apache-2.0",
       "path": ".github/workflows/qa.yml",
       "public_safe_decision": "pass-deterministic-only",
       "reason": "public-safe candidate; human semantic review remains required",
       "reviewer_status": "pending-semantic-review",
-      "sha256": "4bb94690d6e48cb8cefaee6b057847300f8e2dcf0d0cdddf8a12be2ddc5313b7"
+      "sha256": "dc392d90d3db9ab5c14e556c83c9e390f52f04872b2c75687ad632495f8220a7"
     },
     {
       "classification": "project-file",
@@ -40,7 +85,7 @@
       "public_safe_decision": "pass-deterministic-only",
       "reason": "public-safe candidate; human semantic review remains required",
       "reviewer_status": "pending-semantic-review",
-      "sha256": "24954b7bb0742b2db2e5714c6df98e1d4ba4f8c9d8bb218af044b92764dfa1ac"
+      "sha256": "d1b275645f747661fd35e8d2763ce6e5df6670dd05629c30d4279553ebefbdd1"
     },
     {
       "classification": "project-metadata",
@@ -67,7 +112,7 @@
       "public_safe_decision": "pass-deterministic-only",
       "reason": "public-safe candidate; human semantic review remains required",
       "reviewer_status": "pending-semantic-review",
-      "sha256": "f94165cc828769e6cb8f28391ec25a40191fdb2983bcd05e21681131e33ca4b5"
+      "sha256": "35091399c6ca053b8253b7990a55c735fb64ada7b61a10930040247f0fb9ba1b"
     },
     {
       "classification": "project-file",
@@ -598,7 +643,7 @@
       "public_safe_decision": "pass-deterministic-only",
       "reason": "public-safe candidate; human semantic review remains required",
       "reviewer_status": "pending-semantic-review",
-      "sha256": "2dece88b6a6ea4a1e6c6013dee3d76e1ebee3796c7c09eec9ba8cf527507023c"
+      "sha256": "9412d801389eeb655f3187958986180f12b0b479201d08b230789362e9213dab"
     },
     {
       "classification": "test-code",

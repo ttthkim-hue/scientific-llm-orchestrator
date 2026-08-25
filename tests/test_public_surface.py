@@ -24,6 +24,17 @@ class PublicSurfaceTests(unittest.TestCase):
             "publication-manifest.json",
         ):
             self.assertTrue((ROOT / relative).is_file(), relative)
+        github = ROOT / ".github"
+        issue_templates = github / "ISSUE_TEMPLATE"
+        for relative in (
+            github / "workflows" / "qa.yml",
+            github / "labels.yml",
+            issue_templates / "config.yml",
+            issue_templates / "bug_report.yml",
+            issue_templates / "docs.yml",
+            issue_templates / "inbound_feedback.yml",
+        ):
+            self.assertTrue(relative.is_file(), relative.relative_to(ROOT).as_posix())
 
     def test_manifest_is_self_excluding_and_safe(self):
         manifest = json.loads((ROOT / "publication-manifest.json").read_text(encoding="utf-8"))
