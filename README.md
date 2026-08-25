@@ -75,6 +75,16 @@ The route is a proposal lane. A worker cannot decide scientific validity,
 citations, security severity, canonical-source acceptance, or release status.
 The first release has no automatic code application.
 
+## Captain portfolio extension
+
+The provider-neutral [Captain portfolio](docs/captain-portfolio.md) separates
+exact tools, bounded local mechanics, private implementation, routine hosted
+implementation, complex hosted implementation, deterministic QA, and frontier
+acceptance. The public example contains no provider binding, account state,
+price, credential, local path, raw prompt, or raw response. Its offline tests
+verify privacy-aware role selection and fail-closed authority boundaries; they
+do not claim actual-model quality.
+
 ## Evidence status
 
 The exact allowed labels are `observed-real-model`, `observed-deterministic`,
@@ -89,6 +99,8 @@ performance evidence.
 - `src/scientific_llm_orchestrator/` — versioned contracts, routing, validators,
   metrics, and dry-run adapter.
 - `schemas/` and `configs/` — machine-readable public contracts and examples.
+- `configs/captain-portfolio.example.json` — provider-neutral role and
+  promotion policy for external review.
 - `benchmarks/` — balanced public-safe coding, data/mechanics, visual/figure,
   and parametric-CAD fixtures with expected results.
 - `scripts/` — offline QA, benchmark, review-bundle, and publication scan.
