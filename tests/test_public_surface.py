@@ -21,6 +21,8 @@ class PublicSurfaceTests(unittest.TestCase):
             "scripts/build_review_bundle.py",
             "scripts/scan_publication_boundary.py",
             "scripts/fresh_clone_smoke.py",
+            "configs/captain-portfolio.example.json",
+            "docs/captain-portfolio.md",
             "publication-manifest.json",
         ):
             self.assertTrue((ROOT / relative).is_file(), relative)

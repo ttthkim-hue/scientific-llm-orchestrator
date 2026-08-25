@@ -1,0 +1,67 @@
+{
+  "policy_version": "captain-portfolio-v1",
+  "evidence_status": "proposed",
+  "provider_bindings_included": false,
+  "automatic_apply": false,
+  "final_authority": "frontier",
+  "role_order": [
+    "deterministic_tool",
+    "local_mechanical_worker",
+    "privacy_appropriate_implementation_worker",
+    "deterministic_qa",
+    "frontier_acceptance"
+  ],
+  "implementation_roles": {
+    "private_or_local": {
+      "role": "private_implementation_worker",
+      "eligible_privacy_classes": ["local-private"]
+    },
+    "routine_hosted": {
+      "role": "routine_hosted_worker",
+      "eligible_privacy_classes": ["public", "public-synthetic"]
+    },
+    "complex_hosted": {
+      "role": "complex_hosted_worker",
+      "eligible_privacy_classes": ["public", "public-synthetic"]
+    }
+  },
+  "required_hosted_preflight_gates": [
+    "route_active",
+    "privacy_allowlisted",
+    "fresh_usage_headroom",
+    "exact_role_binding_discovered",
+    "deterministic_evaluator_available"
+  ],
+  "hosted_runtime_policy": {
+    "included_pool_only": true,
+    "fast_mode_allowed": false,
+    "on_demand_spend_allowed": false,
+    "automatic_provider_retry": false
+  },
+  "promotion_gate": {
+    "state": "proposed",
+    "quality_equivalence_claimed": false,
+    "minimum_independent_qa_receipts": 20,
+    "minimum_stable_task_families": 3,
+    "compare_verified_pass_rate": true,
+    "compare_frontier_review_burden": true
+  },
+  "telemetry": {
+    "allowed": [
+      "role",
+      "task_family",
+      "status",
+      "token_counts",
+      "latency",
+      "evaluator_outcome"
+    ],
+    "forbidden": [
+      "unredacted_model_input",
+      "unredacted_model_output",
+      "credential",
+      "account_identity",
+      "private_source_text",
+      "local_absolute_path"
+    ]
+  }
+}
