@@ -1,0 +1,22 @@
+# Intended solo-maintainer triage vocabulary.
+# GitHub does not create labels from this file automatically. Issue templates
+# apply these names when the labels already exist on the repository.
+# Reuses GitHub's existing defaults where they already match.
+- name: bug
+  color: "d73a4a"
+  description: Something isn't working
+- name: documentation
+  color: "0075ca"
+  description: Improvements or additions to documentation
+- name: enhancement
+  color: "a2eeef"
+  description: New feature or request
+- name: x-feedback
+  color: "1d76db"
+  description: Inbound public feedback from X, GitHub comments, or similar
+- name: good first issue
+  color: "7057ff"
+  description: Good for newcomers
+- name: wontfix
+  color: "ffffff"
+  description: This will not be worked on

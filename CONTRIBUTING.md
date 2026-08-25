@@ -15,3 +15,17 @@ public-safe.
 
 Changes require deterministic QA followed by human semantic review. A passing
 synthetic benchmark is not scientific or real-model evidence.
+
+## Issues and inbound feedback
+
+Use the GitHub issue templates for bugs, docs, and inbound public feedback.
+Do not paste credentials, unpublished research, raw model I/O, local paths,
+or provider account details.
+
+Triage labels (GitHub defaults reused where they already exist): `bug`,
+`documentation`, `enhancement`, `x-feedback`, `good first issue`, `wontfix`.
+The `x-feedback` label is for X posts, GitHub comments, and similar public
+notes that should become tracked work and maybe a later draft PR.
+
+Suggested repository topics for GitHub Settings: `llm`, `orchestration`,
+`scientific-computing`, `agents`, `python`, `apache-2.0`.

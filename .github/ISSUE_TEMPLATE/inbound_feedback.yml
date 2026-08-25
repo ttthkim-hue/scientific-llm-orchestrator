@@ -1,0 +1,58 @@
+name: Inbound feedback
+description: Capture public X/GitHub feedback so a solo maintainer can triage it into docs, code, or process work.
+title: "[Feedback]: "
+labels: ["x-feedback"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Use this when an X post, GitHub comment, or other public note should become a tracked issue and maybe a later draft PR.
+
+        Do not copy credentials, private research, local paths, raw prompts, raw responses, or provider account details from the source.
+  - type: input
+    id: source_url
+    attributes:
+      label: Source URL
+      description: Public URL for the originating X post, GitHub comment, discussion, or similar inbound note.
+      placeholder: https://
+    validations:
+      required: true
+  - type: dropdown
+    id: change_kind
+    attributes:
+      label: Requested change kind
+      description: What kind of follow-up would this become?
+      options:
+        - code
+        - docs
+        - process
+        - unsure / needs triage
+    validations:
+      required: true
+  - type: textarea
+    id: summary
+    attributes:
+      label: Public-safe summary
+      description: Restate the request without secrets or unpublished material. Quote only what is needed to act.
+    validations:
+      required: true
+  - type: dropdown
+    id: followup
+    attributes:
+      label: Suggested maintainer follow-up
+      options:
+        - Open a draft PR after review
+        - Needs discussion first
+        - Docs-only change
+        - Likely wontfix
+    validations:
+      required: true
+  - type: checkboxes
+    id: boundary
+    attributes:
+      label: Authority and privacy
+      options:
+        - label: The source is public, and this issue does not include credentials, private data, local paths, or raw model I/O.
+          required: true
+        - label: Acting on this feedback would not require enabling automatic_apply or adding provider credentials in-tree.
+          required: true
