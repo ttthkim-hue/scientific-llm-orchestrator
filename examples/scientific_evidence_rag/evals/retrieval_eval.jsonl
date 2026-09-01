@@ -1,0 +1,36 @@
+{"query":"Who retains scientific validity and release authority in the orchestrator?","expected_ids":["E001"],"unsupported":false}
+{"query":"Are worker routes allowed to automatically apply generated code?","expected_ids":["E001"],"unsupported":false}
+{"query":"What authority stays with a human or frontier reviewer?","expected_ids":["E001"],"unsupported":false}
+{"query":"Which checks happen before the orchestrator selects a route?","expected_ids":["E002"],"unsupported":false}
+{"query":"What happens when the preferred local or hosted worker is unavailable?","expected_ids":["E002"],"unsupported":false}
+{"query":"Does the routing layer enforce path scope and validation allowlists?","expected_ids":["E002"],"unsupported":false}
+{"query":"Which JSON Schema keywords are supported by the project validator?","expected_ids":["E003"],"unsupported":false}
+{"query":"Is the schema validator a full JSON Schema implementation?","expected_ids":["E003"],"unsupported":false}
+{"query":"Does the validator support additionalProperties and minItems?","expected_ids":["E003"],"unsupported":false}
+{"query":"What can the WebMCP browser agent do before human approval?","expected_ids":["E004"],"unsupported":false}
+{"query":"Can the agent approve a release in Captain?","expected_ids":["E004"],"unsupported":false}
+{"query":"Why is human authority visible in the WebMCP demo?","expected_ids":["E004"],"unsupported":false}
+{"query":"Which binder-jet defect regions can be measured from design versus bed images?","expected_ids":["E005"],"unsupported":false}
+{"query":"Does image match analysis alone prove validated closed-loop machine control?","expected_ids":["E005"],"unsupported":false}
+{"query":"What variables should a vaterite synthesis record?","expected_ids":["E006"],"unsupported":false}
+{"query":"Can speciation simulation alone validate final vaterite phase fraction?","expected_ids":["E006"],"unsupported":false}
+{"query":"What experimental method is named for validating final calcium-carbonate phase?","expected_ids":["E006"],"unsupported":false}
+{"query":"Why is pilot-scale clinker agreement stronger than composition calculation alone?","expected_ids":["E007"],"unsupported":false}
+{"query":"What additional evidence is needed for commercial clinker readiness?","expected_ids":["E007"],"unsupported":false}
+{"query":"Why should related patent filings be normalized by family?","expected_ids":["E008"],"unsupported":false}
+{"query":"What should a patent landscape separate besides application and grant status?","expected_ids":["E008"],"unsupported":false}
+{"query":"How should a scientific RAG answer behave when retrieved evidence is weak?","expected_ids":["E009"],"unsupported":false}
+{"query":"What should material claims expose in a scientific RAG answer?","expected_ids":["E009"],"unsupported":false}
+{"query":"Which query types belong in a useful retrieval evaluation?","expected_ids":["E010"],"unsupported":false}
+{"query":"Should retrieval ranking metrics be evaluated separately from answer grounding?","expected_ids":["E010"],"unsupported":false}
+{"query":"Why is a planning-stage Physics-AI digital twin not plant-grade proof?","expected_ids":["E011"],"unsupported":false}
+{"query":"What evidence is required before claiming plant-grade Physics-AI accuracy?","expected_ids":["E011"],"unsupported":false}
+{"query":"Why is an offline benchmark weaker than a monitored engineering deployment?","expected_ids":["E012"],"unsupported":false}
+{"query":"What operational evidence should support a production engineering AI claim?","expected_ids":["E012"],"unsupported":false}
+{"query":"Which evidence covers both abstention and evaluation of unsupported RAG queries?","expected_ids":["E009","E010"],"unsupported":false}
+{"query":"What is the melting point of tungsten?","expected_ids":[],"unsupported":true}
+{"query":"Which GPU has the highest benchmark score in 2026?","expected_ids":[],"unsupported":true}
+{"query":"What salary does the project author earn?","expected_ids":[],"unsupported":true}
+{"query":"Who won the 2025 Nobel Prize in Chemistry?","expected_ids":[],"unsupported":true}
+{"query":"What is the exact market price of vaterite per kilogram?","expected_ids":[],"unsupported":true}
+{"query":"What is the operator's home address?","expected_ids":[],"unsupported":true}
