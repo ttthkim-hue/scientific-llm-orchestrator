@@ -15,10 +15,10 @@ from scientific_llm_orchestrator.pvoca_cascade import (
 
 class PvocaCascadeTests(unittest.TestCase):
     def test_gate_targets_capture_marginal_value(self):
-        rescued = CascadeExample(Outcome(False, 10), Outcome(True, 40), Outcome(False, 60))
-        verify_only = CascadeExample(Outcome(False, 10), Outcome(False, 40), Outcome(True, 60))
-        harmful_verify = CascadeExample(Outcome(False, 10), Outcome(True, 40), Outcome(False, 60))
-        neutral = CascadeExample(Outcome(True, 10), Outcome(True, 40), Outcome(True, 60))
+        rescued = CascadeExample(Outcome(False, 10), Outcome(True, 30), Outcome(False, 20))
+        verify_only = CascadeExample(Outcome(False, 10), Outcome(False, 40), Outcome(True, 20))
+        harmful_verify = CascadeExample(Outcome(False, 10), Outcome(True, 30), Outcome(False, 20))
+        neutral = CascadeExample(Outcome(True, 10), Outcome(True, 30), Outcome(True, 20))
         self.assertEqual(gate_s_target(rescued), 1)
         self.assertEqual(gate_s_target(verify_only), 1)
         self.assertEqual(gate_s_target(neutral), 0)
@@ -60,8 +60,8 @@ class PvocaCascadeTests(unittest.TestCase):
 
     def test_policy_evaluation(self):
         rows = [
-            CascadeExample(Outcome(True, 10), Outcome(True, 40), Outcome(True, 60)),
-            CascadeExample(Outcome(False, 10), Outcome(True, 40), Outcome(True, 60)),
+            CascadeExample(Outcome(True, 10), Outcome(True, 30), Outcome(True, 20)),
+            CascadeExample(Outcome(False, 10), Outcome(True, 30), Outcome(True, 20)),
         ]
         metrics = evaluate_choices(rows, [Action.STOP, Action.THINK])
         self.assertEqual(metrics["accuracy"], 1.0)
@@ -77,6 +77,8 @@ class PvocaCascadeTests(unittest.TestCase):
                 controller_tokens=80000,
                 unsafe_stop_errors=0,
                 stop_decisions=20,
+                controller_worse_items=0,
+                controller_better_items=0,
             )
         )
         self.assertEqual(result["status"], "SHADOW_ONLY")
@@ -92,6 +94,8 @@ class PvocaCascadeTests(unittest.TestCase):
                 controller_tokens=3_500_000,
                 unsafe_stop_errors=0,
                 stop_decisions=1000,
+                controller_worse_items=5,
+                controller_better_items=10,
             )
         )
         self.assertEqual(result["status"], "PROMOTION_READY")
