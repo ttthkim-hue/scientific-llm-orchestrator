@@ -8,7 +8,7 @@ from scientific_llm_orchestrator.pvoca import (
     choose_oracle,
     extract_last_number,
     run_item,
-    stratified_sample,
+    balanced_pilot_sample,
     summarize,
 )
 
@@ -48,18 +48,29 @@ class PvocaTests(unittest.TestCase):
         ]
         self.assertEqual(choose_oracle(rows), Action.VERIFY)
 
-    def test_stratified_sample_108(self):
+    def test_balanced_pilot_sample_108(self):
         items = []
-        for d in range(6):
+        for d in range(19):
             for difficulty in ("easy", "medium", "hard"):
-                for i in range(8):
+                for i in range(3):
                     items.append(Item(f"{d}-{difficulty}-{i}", f"D{d}", difficulty, "q", float(i)))
-        sample = stratified_sample(items)
+        sample = balanced_pilot_sample(items)
         self.assertEqual(len(sample), 108)
-        cells = {}
-        for item in sample:
-            cells[(item.domain, item.difficulty)] = cells.get((item.domain, item.difficulty), 0) + 1
-        self.assertEqual(set(cells.values()), {6})
+        for difficulty in ("easy", "medium", "hard"):
+            rows = [item for item in sample if item.difficulty == difficulty]
+            self.assertEqual(len(rows), 36)
+            self.assertGreaterEqual(len({item.domain for item in rows}), 18)
+
+    def test_endpoint_normalization(self):
+        from scientific_llm_orchestrator.pvoca import OpenAICompatibleLocalProvider
+        self.assertEqual(
+            OpenAICompatibleLocalProvider(endpoint="http://127.0.0.1:8000", model="m").endpoint,
+            "http://127.0.0.1:8000/v1/chat/completions",
+        )
+        self.assertEqual(
+            OpenAICompatibleLocalProvider(endpoint="http://127.0.0.1:8000/v1", model="m").endpoint,
+            "http://127.0.0.1:8000/v1/chat/completions",
+        )
 
     def test_summary(self):
         records = []
