@@ -189,27 +189,35 @@ def summarize(records: Sequence[dict]) -> dict:
         accuracy[action.value] = sum(r.correct for r in rows) / len(rows)
         tokens[action.value] = sum(r.total_tokens for r in rows)
     oracle_counts = {a.value: 0 for a in actions}
+    solvable_oracle_counts = {a.value: 0 for a in actions}
     unsolved = 0
     oracle_tokens = 0
+    rank = {Action.STOP: 0, Action.VERIFY: 1, Action.THINK: 2}
     for record in records:
+        results = list(record["results"])
         oracle = record["oracle_action"]
         if oracle is None:
             unsolved += 1
-            continue
-        oracle_counts[oracle.value] += 1
-        chosen = next(r for r in record["results"] if r.action == oracle)
+            # A real policy still pays for an action even when every action is
+            # wrong. Charge the cheapest observed action rather than zero.
+            chosen = min(results, key=lambda r: (r.total_tokens, r.latency_ms, r.calls, rank[r.action]))
+        else:
+            solvable_oracle_counts[oracle.value] += 1
+            chosen = next(r for r in results if r.action == oracle)
+        oracle_counts[chosen.action.value] += 1
         oracle_tokens += chosen.total_tokens
     solvable = len(records) - unsolved
     oracle_accuracy = solvable / len(records)
     think_tokens = tokens[Action.THINK.value]
     savings_vs_think = 1.0 - (oracle_tokens / think_tokens) if think_tokens else 0.0
-    shares = {k: (v / solvable if solvable else 0.0) for k, v in oracle_counts.items()}
+    shares = {k: (v / len(records) if records else 0.0) for k, v in oracle_counts.items()}
     heterogeneous = sum(share >= 0.15 for share in shares.values()) >= 2
     return {
         "items": len(records),
         "accuracy": accuracy,
         "tokens": tokens,
         "oracle_counts": oracle_counts,
+        "solvable_oracle_counts": solvable_oracle_counts,
         "oracle_shares": shares,
         "unsolved": unsolved,
         "oracle_accuracy": oracle_accuracy,
