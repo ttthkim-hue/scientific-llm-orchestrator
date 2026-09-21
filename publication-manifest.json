@@ -529,6 +529,15 @@
       "sha256": "01a08efd07dc4ad85615c7c458c1e4f130c2affbd6cd37783e89d3247c90ddd8"
     },
     {
+      "path": "scripts/train_pvoca_controller_v0.py",
+      "sha256": "d7ae8a77063a94e341a80384f652bf58b50cb74a600373c5ec9ee4963ddcd4b6",
+      "classification": "qa-script",
+      "license_status": "Apache-2.0",
+      "reviewer_status": "pending-semantic-review",
+      "public_safe_decision": "pass-deterministic-only",
+      "reason": "public-safe candidate; human semantic review remains required"
+    },
+    {
       "classification": "project-file",
       "license_status": "Apache-2.0",
       "path": "setup.py",
@@ -610,6 +619,15 @@
       "reason": "public-safe candidate; human semantic review remains required"
     },
     {
+      "path": "src/scientific_llm_orchestrator/pvoca_controller.py",
+      "sha256": "34e58f5b306530a97b3c26be4f5545dc24c648927490b9465f39b7f76024dd3f",
+      "classification": "source-code",
+      "license_status": "Apache-2.0",
+      "reviewer_status": "pending-semantic-review",
+      "public_safe_decision": "pass-deterministic-only",
+      "reason": "public-safe candidate; human semantic review remains required"
+    },
+    {
       "classification": "source-code",
       "license_status": "Apache-2.0",
       "path": "src/scientific_llm_orchestrator/routing/__init__.py",
@@ -684,6 +702,15 @@
     {
       "path": "tests/test_pvoca.py",
       "sha256": "c4561786991b43c261a47211b2dde9669e0e06fe53fbb4956c5df063d51ee683",
+      "classification": "test-code",
+      "license_status": "Apache-2.0",
+      "reviewer_status": "pending-semantic-review",
+      "public_safe_decision": "pass-deterministic-only",
+      "reason": "public-safe candidate; human semantic review remains required"
+    },
+    {
+      "path": "tests/test_pvoca_controller.py",
+      "sha256": "b45c85422993dde335ec9af7b24ad9a05a70b8655bd068e5e1b94c31a1c3b187",
       "classification": "test-code",
       "license_status": "Apache-2.0",
       "reviewer_status": "pending-semantic-review",
