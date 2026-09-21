@@ -177,6 +177,10 @@ class PromotionGate:
             raise ValueError("paired disagreement counts must be non-negative")
         if evidence.controller_worse_items + evidence.controller_better_items > evidence.unseen_items:
             raise ValueError("paired disagreement counts exceed sample size")
+        observed_delta = evidence.baseline_correct - evidence.controller_correct
+        paired_delta = evidence.controller_worse_items - evidence.controller_better_items
+        if observed_delta != paired_delta:
+            raise ValueError("paired disagreement counts are inconsistent with accuracy totals")
         z = NormalDist().inv_cdf(0.5 + self.confidence / 2.0)
         second_moment = (
             evidence.controller_worse_items + evidence.controller_better_items
