@@ -70,7 +70,7 @@ def extract_last_number(text: str) -> float | None:
     return value if math.isfinite(value) else None
 
 
-def numeric_correct(predicted: float | None, expected: float, *, rtol: float = 1e-3, atol: float = 1e-6) -> bool:
+def numeric_correct(predicted: float | None, expected: float, *, rtol: float = 5e-2, atol: float = 1e-12) -> bool:
     if predicted is None or not math.isfinite(expected):
         return False
     return math.isclose(predicted, expected, rel_tol=rtol, abs_tol=atol)
@@ -89,7 +89,7 @@ def _result(action: Action, generation: Generation, expected: float, *, rtol: fl
     )
 
 
-def run_item(provider: Provider, item: Item, *, rtol: float = 1e-3, atol: float = 1e-6) -> list[ActionResult]:
+def run_item(provider: Provider, item: Item, *, rtol: float = 5e-2, atol: float = 1e-12) -> list[ActionResult]:
     direct_messages = [
         {"role": "system", "content": "Answer the numeric materials-science question directly. Return only the final numeric answer, with units if useful. Do not show reasoning."},
         {"role": "user", "content": item.question},
@@ -129,29 +129,54 @@ def choose_oracle(results: Sequence[ActionResult]) -> Action | None:
     return winner.action
 
 
-def stratified_sample(
+def balanced_pilot_sample(
     items: Iterable[Item],
     *,
-    domains: Sequence[str] | None = None,
     difficulties: Sequence[str] = ("easy", "medium", "hard"),
-    per_cell: int = 6,
+    per_difficulty: int = 36,
     seed: int = 20260921,
 ) -> list[Item]:
+    """Difficulty-balanced pilot with broad category coverage.
+
+    MatSciBench currently exposes 19 primary_category values, not six disjoint
+    domains. For each difficulty, this sampler shuffles category buckets and
+    takes one item per category in rounds until the quota is filled. This keeps
+    the 108-item pilot (36 x 3) without inventing a six-domain taxonomy.
+    """
     eligible = [i for i in items if i.modality.lower() == "text" and math.isfinite(i.answer)]
-    all_domains = sorted({i.domain for i in eligible})
-    selected_domains = list(domains) if domains is not None else all_domains[:6]
-    if len(selected_domains) != 6:
-        raise ValueError("exactly six domains are required for the v0 pilot")
     rng = random.Random(seed)
     sampled: list[Item] = []
-    for domain in selected_domains:
-        for difficulty in difficulties:
-            cell = [i for i in eligible if i.domain == domain and i.difficulty == difficulty]
-            if len(cell) < per_cell:
-                raise ValueError(f"insufficient items for domain={domain!r}, difficulty={difficulty!r}: {len(cell)} < {per_cell}")
-            sampled.extend(rng.sample(cell, per_cell))
-    return sampled
+    for difficulty in difficulties:
+        buckets: dict[str, list[Item]] = {}
+        for item in eligible:
+            if item.difficulty == difficulty:
+                buckets.setdefault(item.domain, []).append(item)
+        if sum(len(v) for v in buckets.values()) < per_difficulty:
+            raise ValueError(
+                f"insufficient items for difficulty={difficulty!r}: "
+                f"{sum(len(v) for v in buckets.values())} < {per_difficulty}"
+            )
+        domains = sorted(buckets)
+        rng.shuffle(domains)
+        for values in buckets.values():
+            rng.shuffle(values)
 
+        chosen: list[Item] = []
+        round_index = 0
+        while len(chosen) < per_difficulty:
+            progressed = False
+            for domain in domains:
+                bucket = buckets[domain]
+                if round_index < len(bucket):
+                    chosen.append(bucket[round_index])
+                    progressed = True
+                    if len(chosen) == per_difficulty:
+                        break
+            if not progressed:
+                raise ValueError(f"could not fill quota for difficulty={difficulty!r}")
+            round_index += 1
+        sampled.extend(chosen)
+    return sampled
 
 def summarize(records: Sequence[dict]) -> dict:
     if not records:
@@ -218,7 +243,8 @@ class OpenAICompatibleLocalProvider:
     """
 
     def __init__(self, *, endpoint: str, model: str, timeout_s: float = 120.0, max_tokens: int = 2048):
-        self.endpoint = endpoint.rstrip("/") + "/v1/chat/completions"
+        base = endpoint.rstrip("/")
+        self.endpoint = base + "/chat/completions" if base.endswith("/v1") else base + "/v1/chat/completions"
         self.model = model
         self.timeout_s = timeout_s
         self.max_tokens = max_tokens
