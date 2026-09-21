@@ -52,7 +52,7 @@ def choose_stage_action(
     p_stop_rescue: float,
     p_verify_rescue: float,
     p_verify_harm: float,
-    stop_threshold: float,
+    stop_threshold: float | None,
     verify_margin: float,
 ) -> Action:
     """Conservative sequential policy.
@@ -68,12 +68,12 @@ def choose_stage_action(
     }.items():
         if not 0.0 <= value <= 1.0:
             raise ValueError(f"{name} must be in [0, 1]")
-    if not 0.0 <= stop_threshold <= 1.0:
-        raise ValueError("stop_threshold must be in [0, 1]")
+    if stop_threshold is not None and not 0.0 <= stop_threshold <= 1.0:
+        raise ValueError("stop_threshold must be in [0, 1] or None")
     if not 0.0 <= verify_margin <= 1.0:
         raise ValueError("verify_margin must be in [0, 1]")
 
-    if p_stop_rescue <= stop_threshold:
+    if stop_threshold is not None and p_stop_rescue <= stop_threshold:
         return Action.STOP
     if p_verify_rescue - p_verify_harm >= verify_margin:
         return Action.VERIFY
