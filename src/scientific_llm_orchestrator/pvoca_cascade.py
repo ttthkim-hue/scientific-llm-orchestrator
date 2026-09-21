@@ -11,7 +11,7 @@ from .pvoca import Action
 @dataclass(frozen=True)
 class Outcome:
     correct: bool
-    tokens: int
+    incremental_tokens: int
 
 
 @dataclass(frozen=True)
@@ -81,16 +81,23 @@ def choose_stage_action(
 
 
 def cascade_cost(example: CascadeExample, action: Action) -> int:
-    """Cost of the selected observable pipeline.
+    """Cumulative cost for a truly sequential v3 trace.
 
-    STOP pays STOP only. THINK pays THINK. VERIFY pays VERIFY. The benchmark
-    action records already contain each action's measured end-to-end token cost.
+    v3 must record *incremental* cost at each stage. This intentionally avoids
+    reusing v0's independent-action totals, which cannot faithfully price a
+    STOP -> THINK -> VERIFY cascade.
     """
-    return {
-        Action.STOP: example.stop.tokens,
-        Action.THINK: example.think.tokens,
-        Action.VERIFY: example.verify.tokens,
-    }[action]
+    if action == Action.STOP:
+        return example.stop.incremental_tokens
+    if action == Action.THINK:
+        return example.stop.incremental_tokens + example.think.incremental_tokens
+    if action == Action.VERIFY:
+        return (
+            example.stop.incremental_tokens
+            + example.think.incremental_tokens
+            + example.verify.incremental_tokens
+        )
+    raise ValueError(f"unsupported action: {action}")
 
 
 def cascade_correct(example: CascadeExample, action: Action) -> bool:
@@ -140,6 +147,8 @@ class PromotionEvidence:
     controller_tokens: int
     unsafe_stop_errors: int
     stop_decisions: int
+    controller_worse_items: int
+    controller_better_items: int
     crashes: int = 0
     owner_gate_bypasses: int = 0
     production_mutations: int = 0
@@ -160,8 +169,22 @@ class PromotionGate:
             raise ValueError("baseline_tokens must be positive")
         baseline_accuracy = evidence.baseline_correct / evidence.unseen_items
         controller_accuracy = evidence.controller_correct / evidence.unseen_items
-        accuracy_drop_pp = (baseline_accuracy - controller_accuracy) * 100.0
+        accuracy_drop = baseline_accuracy - controller_accuracy
+        accuracy_drop_pp = accuracy_drop * 100.0
         token_savings = 1.0 - evidence.controller_tokens / evidence.baseline_tokens
+
+        if evidence.controller_worse_items < 0 or evidence.controller_better_items < 0:
+            raise ValueError("paired disagreement counts must be non-negative")
+        if evidence.controller_worse_items + evidence.controller_better_items > evidence.unseen_items:
+            raise ValueError("paired disagreement counts exceed sample size")
+        z = NormalDist().inv_cdf(0.5 + self.confidence / 2.0)
+        second_moment = (
+            evidence.controller_worse_items + evidence.controller_better_items
+        ) / evidence.unseen_items
+        variance = max(0.0, second_moment - accuracy_drop * accuracy_drop)
+        accuracy_drop_upper_pp = (
+            accuracy_drop + z * math.sqrt(variance / evidence.unseen_items)
+        ) * 100.0
 
         if evidence.stop_decisions:
             _, unsafe_upper = wilson_interval(
@@ -174,7 +197,7 @@ class PromotionGate:
 
         checks = {
             "sample_size": evidence.unseen_items >= self.min_unseen_items,
-            "accuracy_noninferiority": accuracy_drop_pp <= self.max_accuracy_drop_pp,
+            "accuracy_noninferiority": accuracy_drop_upper_pp <= self.max_accuracy_drop_pp,
             "token_savings": token_savings >= self.min_token_savings,
             "unsafe_stop_bound": unsafe_upper <= self.max_unsafe_stop_rate,
             "crash_free": evidence.crashes == 0,
@@ -188,6 +211,7 @@ class PromotionGate:
                 "baseline_accuracy": baseline_accuracy,
                 "controller_accuracy": controller_accuracy,
                 "accuracy_drop_pp": accuracy_drop_pp,
+                "accuracy_drop_upper_pp": accuracy_drop_upper_pp,
                 "token_savings": token_savings,
                 "unsafe_stop_rate_upper": unsafe_upper,
             },
