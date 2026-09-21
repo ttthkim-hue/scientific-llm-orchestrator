@@ -94,8 +94,8 @@ class PvocaCascadeTests(unittest.TestCase):
                 controller_tokens=3_500_000,
                 unsafe_stop_errors=0,
                 stop_decisions=1000,
-                controller_worse_items=5,
-                controller_better_items=10,
+                controller_worse_items=10,
+                controller_better_items=5,
             )
         )
         self.assertEqual(result["status"], "PROMOTION_READY")
