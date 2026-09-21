@@ -280,3 +280,57 @@ class OpenAICompatibleLocalProvider:
             latency_ms=latency_ms,
             calls=1,
         )
+
+
+class OllamaLocalProvider:
+    """Minimal standard-library adapter for a local Ollama chat endpoint."""
+
+    def __init__(
+        self,
+        *,
+        endpoint: str = "http://127.0.0.1:11434",
+        model: str,
+        timeout_s: float = 180.0,
+        max_tokens: int = 512,
+        num_ctx: int = 8192,
+        keep_alive: str = "10m",
+    ):
+        self.endpoint = endpoint.rstrip("/") + "/api/chat"
+        self.model = model
+        self.timeout_s = timeout_s
+        self.max_tokens = max_tokens
+        self.num_ctx = num_ctx
+        self.keep_alive = keep_alive
+
+    def generate(self, *, messages: Sequence[dict[str, str]], enable_thinking: bool) -> Generation:
+        payload = {
+            "model": self.model,
+            "messages": list(messages),
+            "stream": False,
+            "think": bool(enable_thinking),
+            "keep_alive": self.keep_alive,
+            "options": {
+                "temperature": 0,
+                "num_ctx": self.num_ctx,
+                "num_predict": self.max_tokens,
+            },
+        }
+        body = json.dumps(payload).encode("utf-8")
+        req = request.Request(
+            self.endpoint,
+            data=body,
+            headers={"Content-Type": "application/json", "Accept": "application/json"},
+            method="POST",
+        )
+        start = time.perf_counter()
+        with request.urlopen(req, timeout=self.timeout_s) as response:
+            data = json.loads(response.read().decode("utf-8"))
+        latency_ms = (time.perf_counter() - start) * 1000.0
+        message = data.get("message") or {}
+        return Generation(
+            text=str(message.get("content") or "").strip(),
+            prompt_tokens=int(data.get("prompt_eval_count") or 0),
+            completion_tokens=int(data.get("eval_count") or 0),
+            latency_ms=latency_ms,
+            calls=1,
+        )
