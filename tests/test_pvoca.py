@@ -87,6 +87,20 @@ class PvocaTests(unittest.TestCase):
         self.assertTrue(summary["heterogeneous_actions"])
         self.assertGreater(summary["token_savings_vs_always_think"], 0.0)
 
+    def test_summary_charges_unsolved_items(self):
+        rows = [
+            ActionResult(Action.STOP, "1", 1.0, False, 10, 5.0, 1),
+            ActionResult(Action.THINK, "2", 2.0, False, 40, 20.0, 1),
+            ActionResult(Action.VERIFY, "3", 3.0, False, 25, 12.0, 2),
+        ]
+        records = [{"item": Item("u", "D", "hard", "q", 9.0), "results": rows, "oracle_action": None}]
+        summary = summarize(records)
+        self.assertEqual(summary["unsolved"], 1)
+        self.assertEqual(summary["oracle_tokens"], 10)
+        self.assertEqual(summary["oracle_counts"]["STOP"], 1)
+        self.assertEqual(summary["solvable_oracle_counts"]["STOP"], 0)
+        self.assertAlmostEqual(summary["token_savings_vs_always_think"], 0.75)
+
 
 if __name__ == "__main__":
     unittest.main()
