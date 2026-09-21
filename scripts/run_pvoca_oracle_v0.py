@@ -14,7 +14,7 @@ from scientific_llm_orchestrator.pvoca import (  # noqa: E402
     choose_oracle,
     records_to_jsonable,
     run_item,
-    stratified_sample,
+    balanced_pilot_sample,
     summarize,
 )
 
@@ -45,10 +45,10 @@ def main() -> int:
     parser.add_argument("--model", default="Qwen/Qwen3.5-9B")
     parser.add_argument("--output", type=Path, default=Path("pvoca-oracle-v0-results.json"))
     parser.add_argument("--seed", type=int, default=20260921)
-    parser.add_argument("--per-cell", type=int, default=6)
+    parser.add_argument("--per-difficulty", type=int, default=36)
     args = parser.parse_args()
 
-    sampled = stratified_sample(load_jsonl(args.dataset), per_cell=args.per_cell, seed=args.seed)
+    sampled = balanced_pilot_sample(load_jsonl(args.dataset), per_difficulty=args.per_difficulty, seed=args.seed)
     provider = OpenAICompatibleLocalProvider(endpoint=args.endpoint, model=args.model)
     records = []
     for index, item in enumerate(sampled, start=1):
@@ -60,7 +60,7 @@ def main() -> int:
         "schema": "pvoca.oracle.v0",
         "model": args.model,
         "seed": args.seed,
-        "per_cell": args.per_cell,
+        "per_difficulty": args.per_difficulty,
         "summary": summarize(records),
         "records": records_to_jsonable(records),
     }
