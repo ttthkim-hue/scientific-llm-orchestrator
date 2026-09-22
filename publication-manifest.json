@@ -277,6 +277,15 @@
       "sha256": "7376c4808680ab54dd1c507269208877a2708b72761ef13acd374a2cf1f308d9"
     },
     {
+      "path": "configs/pvoca-experiment-matrix-v3.json",
+      "sha256": "6848903060835a3de955adc844e7b1f981700bd30870b6240b7046b9f05d7096",
+      "classification": "example-config",
+      "license_status": "Apache-2.0",
+      "reviewer_status": "pending-semantic-review",
+      "public_safe_decision": "pass-deterministic-only",
+      "reason": "public-safe candidate; human semantic review remains required"
+    },
+    {
       "path": "configs/pvoca-research-decision-evidence.example.json",
       "sha256": "f5002ab96d7e7eeab81e6f34bd026c09fc542a75ddfbd80977ac40f1ce709dd8",
       "classification": "example-config",
