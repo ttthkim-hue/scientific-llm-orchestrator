@@ -331,6 +331,15 @@
       "reason": "public-safe candidate; human semantic review remains required"
     },
     {
+      "path": "docs/PVOCA_VENUE_STRATEGY_20260922.md",
+      "sha256": "dc972dedc4fe4da1f257622c728374e900b74d65e8cd9fbd3275ff9de0d90eea",
+      "classification": "documentation",
+      "license_status": "Apache-2.0",
+      "reviewer_status": "pending-semantic-review",
+      "public_safe_decision": "pass-deterministic-only",
+      "reason": "public-safe candidate; human semantic review remains required"
+    },
+    {
       "classification": "documentation",
       "license_status": "Apache-2.0",
       "path": "docs/architecture.md",
