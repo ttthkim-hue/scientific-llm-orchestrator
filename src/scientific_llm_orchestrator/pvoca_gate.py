@@ -200,3 +200,37 @@ def select_verify_margin(
         if best is None or key < best:
             best = (cost, margin)
     return best[1] if best is not None else 1.0
+
+
+def expected_calibration_error(
+    probabilities: Sequence[float],
+    labels: Sequence[int],
+    *,
+    bins: int = 10,
+) -> float:
+    """Standard binary ECE on [0, 1].
+
+    Empty bins contribute zero. This is used only as an evaluation diagnostic,
+    never as a training feature.
+    """
+    if len(probabilities) != len(labels):
+        raise ValueError("probabilities and labels must align")
+    if bins < 2:
+        raise ValueError("bins must be at least two")
+    if not probabilities:
+        raise ValueError("at least one probability is required")
+    total = len(probabilities)
+    error = 0.0
+    for b in range(bins):
+        lo = b / bins
+        hi = (b + 1) / bins
+        members = [
+            i for i, p in enumerate(probabilities)
+            if (lo <= float(p) < hi) or (b == bins - 1 and float(p) == 1.0)
+        ]
+        if not members:
+            continue
+        confidence = sum(float(probabilities[i]) for i in members) / len(members)
+        accuracy = sum(int(labels[i]) for i in members) / len(members)
+        error += (len(members) / total) * abs(confidence - accuracy)
+    return error
