@@ -38,14 +38,27 @@
   },
   "strong_submission_extension": {
     "second_model_family_required": true,
-    "second_model_family_status": "NOT_YET_SELECTED",
-    "reason": "Two Qwen scales test scale transfer but do not establish cross-family generalization."
+    "selected_second_family": {
+      "label": "gemma3:27b",
+      "family": "Gemma 3",
+      "role": "cross_family_replication",
+      "ollama_official_size": "17GB Q4_K_M",
+      "context_window": "128K",
+      "local_fit_rationale": "Official Ollama package is well within a 48GB GPU memory envelope; actual P8 residency and throughput must be measured before publication."
+    },
+    "required_extension_runs": [
+      "MatSciBench x gemma3:27b",
+      "SciBench x gemma3:27b"
+    ],
+    "total_strong_submission_runs": 6,
+    "reason": "Two Qwen scales test scale transfer; Gemma 3 adds cross-family generalization."
   },
   "matched_baselines": [
     "always_stop",
     "always_think",
     "always_verify",
-    "question_only_router"
+    "question_only_router",
+    "agreement_verify_router"
   ],
   "decision_policy": {
     "paper_evidence_ready": "methodological completeness may pass even for negative/null performance",
