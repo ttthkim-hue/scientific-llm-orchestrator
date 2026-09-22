@@ -10,6 +10,7 @@ def run(model, benchmark, family, *, items=600, headroom=5.0, acc_drop=0.2, toke
         "benchmark": benchmark,
         "task_family": family,
         "items": items,
+        "matched_baselines": ["always_stop", "always_think", "always_verify", "question_only_router"],
         "fold_reports": [
             {"held_out_groups": ["A", "B"]},
             {"held_out_groups": ["C"]},
@@ -34,18 +35,19 @@ class PvocaEvidenceTests(unittest.TestCase):
             run("m1", "SciBench", "college_science_numeric", items=500),
             run("m2", "SciBench", "college_science_numeric", items=500),
         ]
-        evidence = aggregate_controller_runs(rows, matched_baselines=5)
+        evidence = aggregate_controller_runs(rows)
         self.assertEqual(evidence["unseen_items"], 1200)
         self.assertEqual(evidence["distinct_models"], 2)
         self.assertEqual(evidence["task_families"], 2)
         self.assertEqual(evidence["reproducible_runs"], 4)
+        self.assertEqual(evidence["matched_baselines"], 4)
 
     def test_worst_run_controls_deployment_metrics(self):
         rows = [
             run("m1", "B1", "F1", headroom=6.0, acc_drop=0.1, token=0.25, latency=0.2, ece=0.03),
             run("m2", "B2", "F2", headroom=2.5, acc_drop=0.7, token=0.12, latency=0.08, ece=0.11),
         ]
-        evidence = aggregate_controller_runs(rows, matched_baselines=5)
+        evidence = aggregate_controller_runs(rows)
         self.assertEqual(evidence["oracle_headroom_pp"], 2.5)
         self.assertEqual(evidence["accuracy_drop_upper_pp"], 0.7)
         self.assertEqual(evidence["token_savings"], 0.12)
@@ -56,7 +58,7 @@ class PvocaEvidenceTests(unittest.TestCase):
         bad = run("m1", "B1", "F1")
         bad["model_label"] = "unknown"
         with self.assertRaises(ValueError):
-            aggregate_controller_runs([bad], matched_baselines=4)
+            aggregate_controller_runs([bad])
 
 
 if __name__ == "__main__":
