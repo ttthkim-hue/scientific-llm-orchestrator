@@ -304,6 +304,15 @@
       "reason": "public-safe candidate; human semantic review remains required"
     },
     {
+      "path": "docs/PVOCA_PAPER_SKELETON_V3.md",
+      "sha256": "cc82541175f5e3383589c372a131d4472f9258a551feb301b29b7bdbd3e435b6",
+      "classification": "documentation",
+      "license_status": "Apache-2.0",
+      "reviewer_status": "pending-semantic-review",
+      "public_safe_decision": "pass-deterministic-only",
+      "reason": "public-safe candidate; human semantic review remains required"
+    },
+    {
       "path": "docs/PVOCA_PREREGISTRATION_V3.md",
       "sha256": "1be35752a055371aa2b4d14a4029642b25dd98cb202a76b57fb58fad278764a0",
       "classification": "documentation",
