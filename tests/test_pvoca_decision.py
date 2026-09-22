@@ -48,6 +48,22 @@ class ResearchDecisionGateTests(unittest.TestCase):
         self.assertTrue(result["paper_evidence_ready"])
         self.assertFalse(result["global_shadow_candidate"])
 
+    def test_methodologically_complete_null_study_is_still_paper_ready(self):
+        result = ResearchDecisionGate().evaluate(
+            complete_evidence(
+                oracle_headroom_pp=0.0,
+                paired_transition_items=0,
+                accuracy_drop_upper_pp=4.0,
+                token_savings=0.0,
+                latency_savings=0.0,
+                unsafe_stop_rate_upper=0.10,
+            )
+        )
+        self.assertEqual(result["status"], "PAPER_READY_NEGATIVE_OR_NULL")
+        self.assertTrue(result["paper_evidence_ready"])
+        self.assertFalse(result["mechanism_signal"])
+        self.assertFalse(result["global_shadow_candidate"])
+
     def test_positive_paper_without_shadow_candidate(self):
         result = ResearchDecisionGate().evaluate(
             complete_evidence(
