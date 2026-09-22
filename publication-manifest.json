@@ -277,6 +277,15 @@
       "sha256": "7376c4808680ab54dd1c507269208877a2708b72761ef13acd374a2cf1f308d9"
     },
     {
+      "path": "docs/PVOCA_PAPER_POSITIONING_V3.md",
+      "sha256": "7e99fa9fa4398d000c1a0cad4323b9b518c05377828578daf8df25b364fc415b",
+      "classification": "documentation",
+      "license_status": "Apache-2.0",
+      "reviewer_status": "pending-semantic-review",
+      "public_safe_decision": "pass-deterministic-only",
+      "reason": "public-safe candidate; human semantic review remains required"
+    },
+    {
       "classification": "documentation",
       "license_status": "Apache-2.0",
       "path": "docs/architecture.md",
