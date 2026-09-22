@@ -139,6 +139,8 @@ Primary efficiency measures:
 ## Statistical policy
 
 - Paired item-level correctness transitions are the basis for non-inferiority.
+- Paired accuracy differences also report a two-sided exact McNemar p-value.
+- Token and latency savings report item-paired percentile-bootstrap 95% confidence intervals.
 - 95% uncertainty bounds are reported.
 - Unsafe STOP risk uses a Wilson upper bound.
 - Gate calibration reports held-out ECE.
