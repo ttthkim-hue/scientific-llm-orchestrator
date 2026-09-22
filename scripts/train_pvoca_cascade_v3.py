@@ -19,6 +19,7 @@ from scientific_llm_orchestrator.pvoca_cascade import (  # noqa: E402
 )
 from scientific_llm_orchestrator.pvoca_gate import (  # noqa: E402
     BinaryLogit,
+    expected_calibration_error,
     gate_s_features,
     gate_v_features,
     select_safe_stop_threshold,
@@ -46,9 +47,21 @@ def load_traces(path: Path) -> list[dict]:
 def to_example(trace: dict) -> CascadeExample:
     stages = {row["action"]: row for row in trace["stages"]}
     return CascadeExample(
-        stop=Outcome(bool(stages["STOP"]["correct"]), int(stages["STOP"]["incremental_tokens"])),
-        think=Outcome(bool(stages["THINK"]["correct"]), int(stages["THINK"]["incremental_tokens"])),
-        verify=Outcome(bool(stages["VERIFY"]["correct"]), int(stages["VERIFY"]["incremental_tokens"])),
+        stop=Outcome(
+            bool(stages["STOP"]["correct"]),
+            int(stages["STOP"]["incremental_tokens"]),
+            float(stages["STOP"].get("incremental_latency_ms") or 0.0),
+        ),
+        think=Outcome(
+            bool(stages["THINK"]["correct"]),
+            int(stages["THINK"]["incremental_tokens"]),
+            float(stages["THINK"].get("incremental_latency_ms") or 0.0),
+        ),
+        verify=Outcome(
+            bool(stages["VERIFY"]["correct"]),
+            int(stages["VERIFY"]["incremental_tokens"]),
+            float(stages["VERIFY"].get("incremental_latency_ms") or 0.0),
+        ),
     )
 
 
@@ -102,6 +115,12 @@ def main() -> int:
     all_examples: list[CascadeExample] = []
     unsafe_stop_errors = 0
     stop_decisions = 0
+    test_stop_probs: list[float] = []
+    test_stop_labels: list[int] = []
+    test_verify_rescue_probs: list[float] = []
+    test_verify_rescue_labels: list[int] = []
+    test_verify_harm_probs: list[float] = []
+    test_verify_harm_labels: list[int] = []
 
     for fold in range(args.folds):
         train = [row for row in rows if assignment[str(row["item"].get("domain") or "unknown")] != fold]
@@ -140,6 +159,13 @@ def main() -> int:
             p_stop_rescue = gate_s.predict_proba(gate_s_features(row))
             p_verify_rescue = gate_v_rescue.predict_proba(gate_v_features(row))
             p_verify_harm = gate_v_harm.predict_proba(gate_v_features(row))
+            test_stop_probs.append(p_stop_rescue)
+            test_stop_labels.append(int(row["labels"]["gate_s_rescue"]))
+            test_verify_rescue_probs.append(p_verify_rescue)
+            test_verify_rescue_labels.append(int(row["labels"]["gate_v_rescue"]))
+            test_verify_harm_probs.append(p_verify_harm)
+            test_verify_harm_labels.append(int(row["labels"]["gate_v_harm"]))
+
             action = choose_stage_action(
                 p_stop_rescue=p_stop_rescue,
                 p_verify_rescue=p_verify_rescue,
@@ -204,6 +230,23 @@ def main() -> int:
         worse += int(baseline_ok and not controller_ok)
         better += int(controller_ok and not baseline_ok)
 
+    calibration = {
+        "gate_s_ece": expected_calibration_error(test_stop_probs, test_stop_labels),
+        "gate_v_rescue_ece": expected_calibration_error(
+            test_verify_rescue_probs, test_verify_rescue_labels
+        ),
+        "gate_v_harm_ece": expected_calibration_error(
+            test_verify_harm_probs, test_verify_harm_labels
+        ),
+    }
+    calibration["max_ece"] = max(calibration.values())
+
+    latency_savings_vs_selected_baseline = (
+        1.0 - controller["latency_ms"] / baseline["latency_ms"]
+        if baseline["latency_ms"] > 0
+        else 0.0
+    )
+
     promotion = PromotionGate(
         min_unseen_items=args.promotion_min_items,
         max_accuracy_drop_pp=0.5,
@@ -243,6 +286,15 @@ def main() -> int:
         "stop_decisions": stop_decisions,
         "paired_controller_worse_items": worse,
         "paired_controller_better_items": better,
+        "calibration": calibration,
+        "latency_savings_vs_selected_baseline": latency_savings_vs_selected_baseline,
+        "offline_decision_metrics": {
+            "accuracy_drop_upper_pp": promotion["metrics"]["accuracy_drop_upper_pp"],
+            "token_savings": promotion["metrics"]["token_savings"],
+            "latency_savings": latency_savings_vs_selected_baseline,
+            "unsafe_stop_rate_upper": promotion["metrics"]["unsafe_stop_rate_upper"],
+            "calibration_ece": calibration["max_ece"],
+        },
         "promotion": promotion,
         "fold_reports": fold_reports,
     }
