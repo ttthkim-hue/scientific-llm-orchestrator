@@ -18,6 +18,8 @@ from scientific_llm_orchestrator.pvoca_cascade import (  # noqa: E402
     Outcome,
     PromotionEvidence,
     PromotionGate,
+    cascade_cost,
+    cascade_latency,
     choose_stage_action,
     evaluate_choices,
 )
@@ -35,6 +37,10 @@ from scientific_llm_orchestrator.pvoca_gate import (  # noqa: E402
     select_verify_margin,
 )
 from scientific_llm_orchestrator.pvoca_split import stable_group_folds  # noqa: E402
+from scientific_llm_orchestrator.pvoca_stats import (  # noqa: E402
+    exact_mcnemar_p,
+    paired_bootstrap_savings_interval,
+)
 
 
 def load_traces(path: Path) -> list[dict]:
@@ -362,6 +368,34 @@ def main() -> int:
         worse += int(baseline_ok and not controller_ok)
         better += int(controller_ok and not baseline_ok)
 
+    controller_token_costs = [
+        cascade_cost(example, action)
+        for example, action in zip(all_examples, all_controller_choices)
+    ]
+    baseline_token_costs = [
+        cascade_cost(example, action)
+        for example, action in zip(all_examples, all_baseline_choices)
+    ]
+    controller_latency_costs = [
+        cascade_latency(example, action)
+        for example, action in zip(all_examples, all_controller_choices)
+    ]
+    baseline_latency_costs = [
+        cascade_latency(example, action)
+        for example, action in zip(all_examples, all_baseline_choices)
+    ]
+    token_savings_ci95 = paired_bootstrap_savings_interval(
+        controller_token_costs,
+        baseline_token_costs,
+        seed=args.seed + 1001,
+    )
+    latency_savings_ci95 = paired_bootstrap_savings_interval(
+        controller_latency_costs,
+        baseline_latency_costs,
+        seed=args.seed + 1002,
+    )
+    mcnemar_p = exact_mcnemar_p(worse, better)
+
     calibration = {
         "gate_s_ece": expected_calibration_error(test_stop_probs, test_stop_labels),
         "gate_v_rescue_ece": expected_calibration_error(
@@ -442,6 +476,13 @@ def main() -> int:
         "stop_decisions": stop_decisions,
         "paired_controller_worse_items": worse,
         "paired_controller_better_items": better,
+        "statistics": {
+            "mcnemar_exact_two_sided_p": mcnemar_p,
+            "token_savings_ci95": list(token_savings_ci95),
+            "latency_savings_ci95": list(latency_savings_ci95),
+            "bootstrap_resamples": 2000,
+            "bootstrap_pairing": "item-level controller vs selected baseline",
+        },
         "calibration": calibration,
         "latency_savings_vs_selected_baseline": latency_savings_vs_selected_baseline,
         "offline_decision_metrics": {
