@@ -103,6 +103,9 @@ def main() -> int:
     parser.add_argument("--min-stop-decisions", type=int, default=100)
     parser.add_argument("--max-unsafe-stop-rate", type=float, default=0.01)
     parser.add_argument("--promotion-min-items", type=int, default=1000)
+    parser.add_argument("--model-label", default="unknown")
+    parser.add_argument("--task-family", default="unknown")
+    parser.add_argument("--benchmark", default="unknown")
     args = parser.parse_args()
 
     rows = load_traces(args.traces)
@@ -210,8 +213,58 @@ def main() -> int:
 
     controller = evaluate_choices(all_examples, all_controller_choices)
     baseline = evaluate_choices(all_examples, all_baseline_choices)
+    always_stop = evaluate_choices(all_examples, [Action.STOP] * len(all_examples))
     always_think = evaluate_choices(all_examples, [Action.THINK] * len(all_examples))
     always_verify = evaluate_choices(all_examples, [Action.VERIFY] * len(all_examples))
+
+    fixed = {
+        Action.STOP: always_stop,
+        Action.THINK: always_think,
+        Action.VERIFY: always_verify,
+    }
+    best_fixed_action = max(
+        fixed,
+        key=lambda action: (
+            fixed[action]["accuracy"],
+            -fixed[action]["tokens"],
+            -fixed[action]["latency_ms"],
+        ),
+    )
+    best_fixed_accuracy = fixed[best_fixed_action]["accuracy"]
+
+    oracle_correct = 0
+    oracle_tokens = 0
+    oracle_latency_ms = 0.0
+    correctness_patterns: dict[str, int] = {}
+    heterogeneous_action_items = 0
+    for example in all_examples:
+        outcomes = {
+            Action.STOP: (example.stop.correct, example.stop.incremental_tokens, example.stop.incremental_latency_ms),
+            Action.THINK: (
+                example.think.correct,
+                example.stop.incremental_tokens + example.think.incremental_tokens,
+                example.stop.incremental_latency_ms + example.think.incremental_latency_ms,
+            ),
+            Action.VERIFY: (
+                example.verify.correct,
+                example.stop.incremental_tokens + example.think.incremental_tokens + example.verify.incremental_tokens,
+                example.stop.incremental_latency_ms + example.think.incremental_latency_ms + example.verify.incremental_latency_ms,
+            ),
+        }
+        bits = "".join("1" if outcomes[action][0] else "0" for action in (Action.STOP, Action.THINK, Action.VERIFY))
+        correctness_patterns[bits] = correctness_patterns.get(bits, 0) + 1
+        heterogeneous_action_items += int(bits not in {"000", "111"})
+        correct_actions = [action for action in outcomes if outcomes[action][0]]
+        if correct_actions:
+            oracle_correct += 1
+            chosen = min(correct_actions, key=lambda action: (outcomes[action][1], outcomes[action][2]))
+        else:
+            chosen = min(outcomes, key=lambda action: (outcomes[action][1], outcomes[action][2]))
+        oracle_tokens += int(outcomes[chosen][1])
+        oracle_latency_ms += float(outcomes[chosen][2])
+
+    oracle_accuracy = oracle_correct / len(all_examples)
+    oracle_headroom_pp = (oracle_accuracy - best_fixed_accuracy) * 100.0
 
     worse = better = 0
     for example, controller_action, baseline_action in zip(
@@ -278,10 +331,25 @@ def main() -> int:
         "feature_boundary": "question + outputs observable up to current stage only",
         "uses_hidden_reasoning": False,
         "uses_reference_answer_as_feature": False,
+        "model_label": args.model_label,
+        "task_family": args.task_family,
+        "benchmark": args.benchmark,
+        "heldout_group_count": len(set(groups)),
         "controller": controller,
         "selected_baseline": baseline,
+        "always_stop": always_stop,
         "always_think": always_think,
         "always_verify": always_verify,
+        "best_fixed_action": best_fixed_action.value,
+        "best_fixed_accuracy": best_fixed_accuracy,
+        "oracle": {
+            "accuracy": oracle_accuracy,
+            "tokens": oracle_tokens,
+            "latency_ms": oracle_latency_ms,
+            "headroom_pp_vs_best_fixed": oracle_headroom_pp,
+        },
+        "correctness_patterns": dict(sorted(correctness_patterns.items())),
+        "heterogeneous_action_items": heterogeneous_action_items,
         "unsafe_stop_errors": unsafe_stop_errors,
         "stop_decisions": stop_decisions,
         "paired_controller_worse_items": worse,
