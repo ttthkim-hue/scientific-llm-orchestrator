@@ -93,15 +93,19 @@ class ResearchDecisionGate:
             "group_holdout": evidence.heldout_groups >= self.paper_min_heldout_groups,
             "matched_baselines": evidence.matched_baselines >= self.paper_min_baselines,
             "reproducibility": evidence.reproducible_runs >= self.paper_min_reproducible_runs,
-            "paired_transitions": evidence.paired_transition_items >= self.paper_min_transition_items,
-            "oracle_headroom": evidence.oracle_headroom_pp >= self.paper_min_oracle_headroom_pp,
             "calibration": evidence.calibration_ece <= self.paper_max_calibration_ece,
             "no_leakage": not evidence.leakage_detected,
         }
         paper_ready = all(paper_checks.values())
 
+        mechanism_signal = (
+            evidence.paired_transition_items >= self.paper_min_transition_items
+            and evidence.oracle_headroom_pp >= self.paper_min_oracle_headroom_pp
+        )
+
         offline_checks = {
             "paper_evidence_ready": paper_ready,
+            "mechanism_signal": mechanism_signal,
             "accuracy_noninferiority": (
                 evidence.accuracy_drop_upper_pp <= self.shadow_candidate_max_accuracy_drop_pp
             ),
@@ -135,6 +139,7 @@ class ResearchDecisionGate:
         # separated so deployment value is never inferred from paper readiness.
         positive_offline_result = (
             paper_ready
+            and mechanism_signal
             and evidence.accuracy_drop_upper_pp <= 1.0
             and (
                 evidence.token_savings >= 0.10
@@ -158,6 +163,7 @@ class ResearchDecisionGate:
             "status": status,
             "paper_evidence_ready": paper_ready,
             "positive_offline_result": positive_offline_result,
+            "mechanism_signal": mechanism_signal,
             "global_shadow_candidate": global_shadow_candidate,
             "global_deploy_candidate": global_deploy_candidate,
             "paper_checks": paper_checks,
