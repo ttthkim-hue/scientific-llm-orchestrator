@@ -16,7 +16,6 @@ def main() -> int:
         description="Aggregate multiple isolated P-VoCA v3 run summaries conservatively."
     )
     parser.add_argument("--run", type=Path, action="append", required=True)
-    parser.add_argument("--matched-baselines", type=int, required=True)
     parser.add_argument("--shadow", type=Path)
     parser.add_argument("--output", type=Path, required=True)
     args = parser.parse_args()
@@ -29,7 +28,6 @@ def main() -> int:
     )
     evidence = aggregate_controller_runs(
         runs,
-        matched_baselines=args.matched_baselines,
         shadow=shadow,
     )
     args.output.parent.mkdir(parents=True, exist_ok=True)
