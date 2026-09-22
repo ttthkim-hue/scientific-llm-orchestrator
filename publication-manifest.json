@@ -538,6 +538,15 @@
       "reason": "public-safe candidate; human semantic review remains required"
     },
     {
+      "path": "scripts/prepare_scibench_pvoca_v3.py",
+      "sha256": "6d573236f92e97b1865b6280a368f02dad063e5864c845591938a97d28ae7f2f",
+      "classification": "qa-script",
+      "license_status": "Apache-2.0",
+      "reviewer_status": "pending-semantic-review",
+      "public_safe_decision": "pass-deterministic-only",
+      "reason": "public-safe candidate; human semantic review remains required"
+    },
+    {
       "path": "scripts/run_pvoca_cascade_v3.py",
       "sha256": "9f010e439daddae24e130a86b3ca00e9294423f1ebd1d5a717fc12b7a09cfead",
       "classification": "qa-script",
@@ -718,6 +727,15 @@
       "reason": "public-safe candidate; human semantic review remains required"
     },
     {
+      "path": "src/scientific_llm_orchestrator/pvoca_scibench.py",
+      "sha256": "85e4aa4e3013813f0310c80ac4d015af0e33344b74c88a50cd2f1f0f827e5d2a",
+      "classification": "source-code",
+      "license_status": "Apache-2.0",
+      "reviewer_status": "pending-semantic-review",
+      "public_safe_decision": "pass-deterministic-only",
+      "reason": "public-safe candidate; human semantic review remains required"
+    },
+    {
       "path": "src/scientific_llm_orchestrator/pvoca_split.py",
       "sha256": "13ba96f7b438ee54c04a5184de316a8abaf74f692c2610b1518603d7bec6544d",
       "classification": "source-code",
@@ -846,6 +864,15 @@
     {
       "path": "tests/test_pvoca_gate.py",
       "sha256": "0ea4ce77a2cf46be253b9be8d0b6d9f85db28ea166cb5fdc539f0d9f81136f96",
+      "classification": "test-code",
+      "license_status": "Apache-2.0",
+      "reviewer_status": "pending-semantic-review",
+      "public_safe_decision": "pass-deterministic-only",
+      "reason": "public-safe candidate; human semantic review remains required"
+    },
+    {
+      "path": "tests/test_pvoca_scibench.py",
+      "sha256": "701b3b17909f7fd2a12839d4149e2b3e2208aed403313950709a80ae3f2df33a",
       "classification": "test-code",
       "license_status": "Apache-2.0",
       "reviewer_status": "pending-semantic-review",
