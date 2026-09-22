@@ -60,12 +60,13 @@ class PvocaCascadeTests(unittest.TestCase):
 
     def test_policy_evaluation(self):
         rows = [
-            CascadeExample(Outcome(True, 10), Outcome(True, 30), Outcome(True, 20)),
-            CascadeExample(Outcome(False, 10), Outcome(True, 30), Outcome(True, 20)),
+            CascadeExample(Outcome(True, 10, 5.0), Outcome(True, 30, 10.0), Outcome(True, 20, 15.0)),
+            CascadeExample(Outcome(False, 10, 5.0), Outcome(True, 30, 10.0), Outcome(True, 20, 15.0)),
         ]
         metrics = evaluate_choices(rows, [Action.STOP, Action.THINK])
         self.assertEqual(metrics["accuracy"], 1.0)
         self.assertEqual(metrics["tokens"], 50)
+        self.assertEqual(metrics["latency_ms"], 20.0)
 
     def test_promotion_gate_stays_shadow_on_small_sample(self):
         result = PromotionGate().evaluate(
