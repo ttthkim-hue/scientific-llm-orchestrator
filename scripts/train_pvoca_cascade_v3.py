@@ -9,6 +9,10 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "src"))
 
 from scientific_llm_orchestrator.pvoca import Action  # noqa: E402
+from scientific_llm_orchestrator.pvoca_baselines import (  # noqa: E402
+    agreement_verify_action,
+    select_agreement_verify_threshold,
+)
 from scientific_llm_orchestrator.pvoca_cascade import (  # noqa: E402
     CascadeExample,
     Outcome,
@@ -152,6 +156,7 @@ def main() -> int:
     all_controller_choices: list[Action] = []
     all_baseline_choices: list[Action] = []
     all_question_only_choices: list[Action] = []
+    all_agreement_choices: list[Action] = []
     all_examples: list[CascadeExample] = []
     unsafe_stop_errors = 0
     stop_decisions = 0
@@ -216,6 +221,11 @@ def main() -> int:
             question_model.predict(question_features(str(row["item"]["question"])))
             for row in test
         ]
+        agreement_threshold = select_agreement_verify_threshold(train)
+        agreement_choices = [
+            agreement_verify_action(row, threshold=agreement_threshold)
+            for row in test
+        ]
 
         choices = []
         for row in test:
@@ -246,6 +256,7 @@ def main() -> int:
         baseline_choices = [baseline_action] * len(test)
         controller_metrics = evaluate_choices(examples, choices)
         question_only_metrics = evaluate_choices(examples, question_only_choices)
+        agreement_metrics = evaluate_choices(examples, agreement_choices)
         baseline_metrics = evaluate_choices(examples, baseline_choices)
         think_metrics = evaluate_choices(examples, [Action.THINK] * len(test))
         verify_metrics = evaluate_choices(examples, [Action.VERIFY] * len(test))
@@ -263,6 +274,8 @@ def main() -> int:
                 "baseline_action": baseline_action.value,
                 "controller": controller_metrics,
                 "question_only_router": question_only_metrics,
+                "agreement_verify_threshold": agreement_threshold,
+                "agreement_verify_router": agreement_metrics,
                 "selected_baseline": baseline_metrics,
                 "always_think": think_metrics,
                 "always_verify": verify_metrics,
@@ -272,11 +285,13 @@ def main() -> int:
         all_examples.extend(examples)
         all_controller_choices.extend(choices)
         all_question_only_choices.extend(question_only_choices)
+        all_agreement_choices.extend(agreement_choices)
         all_baseline_choices.extend(baseline_choices)
 
     controller = evaluate_choices(all_examples, all_controller_choices)
     baseline = evaluate_choices(all_examples, all_baseline_choices)
     question_only = evaluate_choices(all_examples, all_question_only_choices)
+    agreement_verify = evaluate_choices(all_examples, all_agreement_choices)
     always_stop = evaluate_choices(all_examples, [Action.STOP] * len(all_examples))
     always_think = evaluate_choices(all_examples, [Action.THINK] * len(all_examples))
     always_verify = evaluate_choices(all_examples, [Action.VERIFY] * len(all_examples))
@@ -402,11 +417,13 @@ def main() -> int:
         "controller": controller,
         "selected_baseline": baseline,
         "question_only_router": question_only,
+        "agreement_verify_router": agreement_verify,
         "matched_baselines": [
             "always_stop",
             "always_think",
             "always_verify",
-            "question_only_router"
+            "question_only_router",
+            "agreement_verify_router"
         ],
         "always_stop": always_stop,
         "always_think": always_think,
