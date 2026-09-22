@@ -502,6 +502,15 @@
       "reason": "public-safe candidate; human semantic review remains required"
     },
     {
+      "path": "scripts/build_pvoca_research_evidence.py",
+      "sha256": "39cbc3dc2b58ae836b296f01a6eec3c78caa2c37481fbb2c265675a8c6ac1ecb",
+      "classification": "qa-script",
+      "license_status": "Apache-2.0",
+      "reviewer_status": "pending-semantic-review",
+      "public_safe_decision": "pass-deterministic-only",
+      "reason": "public-safe candidate; human semantic review remains required"
+    },
+    {
       "classification": "qa-script",
       "license_status": "Apache-2.0",
       "path": "scripts/build_review_bundle.py",
@@ -593,7 +602,7 @@
     },
     {
       "path": "scripts/train_pvoca_cascade_v3.py",
-      "sha256": "7a6ee7ffe8bc5f15714412b380b8d31d632771340afbae9e826e988c44de1a7f",
+      "sha256": "6b256ce2f85c41f15fabf2eac6d1bdae3dc729d2cb67ca476d60316e400d9112",
       "classification": "qa-script",
       "license_status": "Apache-2.0",
       "reviewer_status": "pending-semantic-review",
@@ -711,6 +720,15 @@
     {
       "path": "src/scientific_llm_orchestrator/pvoca_decision.py",
       "sha256": "6b3262408c31b8198a13bdeacfba96dc5a7a780b3161002f31d658297ff9b137",
+      "classification": "source-code",
+      "license_status": "Apache-2.0",
+      "reviewer_status": "pending-semantic-review",
+      "public_safe_decision": "pass-deterministic-only",
+      "reason": "public-safe candidate; human semantic review remains required"
+    },
+    {
+      "path": "src/scientific_llm_orchestrator/pvoca_evidence.py",
+      "sha256": "bc8f3718e98cfe09c8db6538cf6021d5b9544f00f1c5c0fc6e82f78f32ae4fcb",
       "classification": "source-code",
       "license_status": "Apache-2.0",
       "reviewer_status": "pending-semantic-review",
@@ -855,6 +873,15 @@
     {
       "path": "tests/test_pvoca_decision.py",
       "sha256": "fd166a4668cabed758eba3be1080c8193e648829e3aa5f3fe7555382bbc6307e",
+      "classification": "test-code",
+      "license_status": "Apache-2.0",
+      "reviewer_status": "pending-semantic-review",
+      "public_safe_decision": "pass-deterministic-only",
+      "reason": "public-safe candidate; human semantic review remains required"
+    },
+    {
+      "path": "tests/test_pvoca_evidence.py",
+      "sha256": "f59566815f5a72ee51e9da8c156a4f27bcf7a22756aa528a9c7071e5ff6541b0",
       "classification": "test-code",
       "license_status": "Apache-2.0",
       "reviewer_status": "pending-semantic-review",
