@@ -17,6 +17,11 @@ from scientific_llm_orchestrator.pvoca_cascade import (  # noqa: E402
     choose_stage_action,
     evaluate_choices,
 )
+from scientific_llm_orchestrator.pvoca_controller import (  # noqa: E402
+    ControllerExample,
+    SoftmaxController,
+    question_features,
+)
 from scientific_llm_orchestrator.pvoca_gate import (  # noqa: E402
     BinaryLogit,
     expected_calibration_error,
@@ -62,6 +67,40 @@ def to_example(trace: dict) -> CascadeExample:
             int(stages["VERIFY"]["incremental_tokens"]),
             float(stages["VERIFY"].get("incremental_latency_ms") or 0.0),
         ),
+    )
+
+
+def cumulative_outcomes(trace: dict) -> dict[Action, tuple[bool, int, float]]:
+    stages = {row["action"]: row for row in trace["stages"]}
+    stop_tokens = int(stages["STOP"]["incremental_tokens"])
+    think_tokens = int(stages["THINK"]["incremental_tokens"])
+    verify_tokens = int(stages["VERIFY"]["incremental_tokens"])
+    stop_latency = float(stages["STOP"].get("incremental_latency_ms") or 0.0)
+    think_latency = float(stages["THINK"].get("incremental_latency_ms") or 0.0)
+    verify_latency = float(stages["VERIFY"].get("incremental_latency_ms") or 0.0)
+    return {
+        Action.STOP: (bool(stages["STOP"]["correct"]), stop_tokens, stop_latency),
+        Action.THINK: (
+            bool(stages["THINK"]["correct"]),
+            stop_tokens + think_tokens,
+            stop_latency + think_latency,
+        ),
+        Action.VERIFY: (
+            bool(stages["VERIFY"]["correct"]),
+            stop_tokens + think_tokens + verify_tokens,
+            stop_latency + think_latency + verify_latency,
+        ),
+    }
+
+
+def trace_oracle_action(trace: dict) -> Action:
+    outcomes = cumulative_outcomes(trace)
+    correct = [action for action, row in outcomes.items() if row[0]]
+    candidates = correct if correct else list(outcomes)
+    rank = {Action.STOP: 0, Action.THINK: 1, Action.VERIFY: 2}
+    return min(
+        candidates,
+        key=lambda action: (outcomes[action][1], outcomes[action][2], rank[action]),
     )
 
 
@@ -115,6 +154,7 @@ def main() -> int:
     fold_reports = []
     all_controller_choices: list[Action] = []
     all_baseline_choices: list[Action] = []
+    all_question_only_choices: list[Action] = []
     all_examples: list[CascadeExample] = []
     unsafe_stop_errors = 0
     stop_decisions = 0
@@ -157,6 +197,29 @@ def main() -> int:
             ],
         )
 
+        question_train = []
+        for row in train:
+            outcomes = cumulative_outcomes(row)
+            question_train.append(
+                ControllerExample(
+                    question=str(row["item"]["question"]),
+                    oracle_action=trace_oracle_action(row),
+                    outcomes={
+                        action: (values[0], values[1])
+                        for action, values in outcomes.items()
+                    },
+                )
+            )
+        question_model = SoftmaxController(len(question_features("x")))
+        question_model.fit(
+            question_train,
+            seed=args.seed + fold * 17 + 3,
+        )
+        question_only_choices = [
+            question_model.predict(question_features(str(row["item"]["question"])))
+            for row in test
+        ]
+
         choices = []
         for row in test:
             p_stop_rescue = gate_s.predict_proba(gate_s_features(row))
@@ -185,6 +248,7 @@ def main() -> int:
         baseline_action = baseline_from_train(train)
         baseline_choices = [baseline_action] * len(test)
         controller_metrics = evaluate_choices(examples, choices)
+        question_only_metrics = evaluate_choices(examples, question_only_choices)
         baseline_metrics = evaluate_choices(examples, baseline_choices)
         think_metrics = evaluate_choices(examples, [Action.THINK] * len(test))
         verify_metrics = evaluate_choices(examples, [Action.VERIFY] * len(test))
@@ -201,6 +265,7 @@ def main() -> int:
                 "verify_margin": verify_margin,
                 "baseline_action": baseline_action.value,
                 "controller": controller_metrics,
+                "question_only_router": question_only_metrics,
                 "selected_baseline": baseline_metrics,
                 "always_think": think_metrics,
                 "always_verify": verify_metrics,
@@ -209,10 +274,12 @@ def main() -> int:
 
         all_examples.extend(examples)
         all_controller_choices.extend(choices)
+        all_question_only_choices.extend(question_only_choices)
         all_baseline_choices.extend(baseline_choices)
 
     controller = evaluate_choices(all_examples, all_controller_choices)
     baseline = evaluate_choices(all_examples, all_baseline_choices)
+    question_only = evaluate_choices(all_examples, all_question_only_choices)
     always_stop = evaluate_choices(all_examples, [Action.STOP] * len(all_examples))
     always_think = evaluate_choices(all_examples, [Action.THINK] * len(all_examples))
     always_verify = evaluate_choices(all_examples, [Action.VERIFY] * len(all_examples))
@@ -337,6 +404,13 @@ def main() -> int:
         "heldout_group_count": len(set(groups)),
         "controller": controller,
         "selected_baseline": baseline,
+        "question_only_router": question_only,
+        "matched_baselines": [
+            "always_stop",
+            "always_think",
+            "always_verify",
+            "question_only_router"
+        ],
         "always_stop": always_stop,
         "always_think": always_think,
         "always_verify": always_verify,
