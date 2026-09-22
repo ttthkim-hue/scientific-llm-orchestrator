@@ -916,6 +916,15 @@
       "reason": "public-safe candidate; human semantic review remains required"
     },
     {
+      "path": "tests/test_pvoca_policy_pipeline.py",
+      "sha256": "8675cf5a617689d32f1dd0c8e6f51232bca975febc6407de771d3d0fb64a8ad2",
+      "classification": "test-code",
+      "license_status": "Apache-2.0",
+      "reviewer_status": "pending-semantic-review",
+      "public_safe_decision": "pass-deterministic-only",
+      "reason": "public-safe candidate; human semantic review remains required"
+    },
+    {
       "path": "tests/test_pvoca_scibench.py",
       "sha256": "701b3b17909f7fd2a12839d4149e2b3e2208aed403313950709a80ae3f2df33a",
       "classification": "test-code",
