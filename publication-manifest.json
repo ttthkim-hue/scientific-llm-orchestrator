@@ -304,6 +304,15 @@
       "reason": "public-safe candidate; human semantic review remains required"
     },
     {
+      "path": "docs/PVOCA_RESULT_POLICY_V3.md",
+      "sha256": "29e7f0c4252155d59ed0ee4a1b6bcdebc769db615f4f4b71d92c38c2d0d78a22",
+      "classification": "documentation",
+      "license_status": "Apache-2.0",
+      "reviewer_status": "pending-semantic-review",
+      "public_safe_decision": "pass-deterministic-only",
+      "reason": "public-safe candidate; human semantic review remains required"
+    },
+    {
       "classification": "documentation",
       "license_status": "Apache-2.0",
       "path": "docs/architecture.md",
