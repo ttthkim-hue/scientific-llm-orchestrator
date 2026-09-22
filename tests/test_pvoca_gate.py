@@ -2,6 +2,7 @@ import unittest
 
 from scientific_llm_orchestrator.pvoca_gate import (
     BinaryLogit,
+    expected_calibration_error,
     gate_s_features,
     gate_v_features,
     select_safe_stop_threshold,
@@ -66,6 +67,16 @@ class PvocaGateTests(unittest.TestCase):
             [10, 10, 10],
         )
         self.assertIn(margin, (0.05, 0.1, 0.2, 0.3, 0.4, 0.5))
+
+    def test_ece_detects_calibration_quality(self):
+        self.assertAlmostEqual(
+            expected_calibration_error([0.0, 1.0], [0, 1], bins=2),
+            0.0,
+        )
+        self.assertGreater(
+            expected_calibration_error([0.9, 0.9], [0, 0], bins=2),
+            0.8,
+        )
 
     def test_wilson_upper_is_conservative(self):
         self.assertGreater(wilson_upper(0, 100), 0.0)
