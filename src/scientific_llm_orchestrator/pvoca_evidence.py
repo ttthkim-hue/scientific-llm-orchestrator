@@ -7,7 +7,6 @@ from typing import Sequence
 def aggregate_controller_runs(
     runs: Sequence[dict],
     *,
-    matched_baselines: int,
     shadow: dict | None = None,
 ) -> dict:
     """Build conservative paper/deployment evidence from multiple v3 runs.
@@ -18,9 +17,6 @@ def aggregate_controller_runs(
     """
     if not runs:
         raise ValueError("at least one controller run is required")
-    if matched_baselines < 0:
-        raise ValueError("matched_baselines must be non-negative")
-
     models: set[str] = set()
     task_families: set[str] = set()
     benchmark_items: dict[str, int] = {}
@@ -34,6 +30,7 @@ def aggregate_controller_runs(
     latency_savings: list[float] = []
     unsafe_stop_upper: list[float] = []
     leakage_detected = False
+    common_baselines: set[str] | None = None
 
     for run in runs:
         if run.get("schema") != "pvoca.cascade.controller.v3":
@@ -46,6 +43,12 @@ def aggregate_controller_runs(
 
         models.add(model)
         task_families.add(family)
+        run_baselines = set(map(str, run.get("matched_baselines") or []))
+        common_baselines = (
+            run_baselines
+            if common_baselines is None
+            else common_baselines.intersection(run_baselines)
+        )
         benchmark_items[benchmark] = max(
             benchmark_items.get(benchmark, 0),
             int(run.get("items") or 0),
@@ -79,7 +82,8 @@ def aggregate_controller_runs(
         "distinct_models": len(models),
         "task_families": len(task_families),
         "heldout_groups": len(heldout_groups),
-        "matched_baselines": matched_baselines,
+        "matched_baselines": len(common_baselines or set()),
+        "matched_baseline_names": sorted(common_baselines or set()),
         "reproducible_runs": len(runs),
         "paired_transition_items": paired_transition_items,
         "oracle_headroom_pp": min(headrooms),
