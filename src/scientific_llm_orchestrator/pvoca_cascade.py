@@ -12,6 +12,7 @@ from .pvoca import Action
 class Outcome:
     correct: bool
     incremental_tokens: int
+    incremental_latency_ms: float = 0.0
 
 
 @dataclass(frozen=True)
@@ -100,6 +101,21 @@ def cascade_cost(example: CascadeExample, action: Action) -> int:
     raise ValueError(f"unsupported action: {action}")
 
 
+def cascade_latency(example: CascadeExample, action: Action) -> float:
+    """Cumulative latency for the selected sequential v3 path."""
+    if action == Action.STOP:
+        return float(example.stop.incremental_latency_ms)
+    if action == Action.THINK:
+        return float(example.stop.incremental_latency_ms + example.think.incremental_latency_ms)
+    if action == Action.VERIFY:
+        return float(
+            example.stop.incremental_latency_ms
+            + example.think.incremental_latency_ms
+            + example.verify.incremental_latency_ms
+        )
+    raise ValueError(f"unsupported action: {action}")
+
+
 def cascade_correct(example: CascadeExample, action: Action) -> bool:
     return {
         Action.STOP: example.stop.correct,
@@ -115,10 +131,12 @@ def evaluate_choices(examples: Sequence[CascadeExample], choices: Sequence[Actio
         raise ValueError("at least one example is required")
     correct = sum(cascade_correct(ex, action) for ex, action in zip(examples, choices))
     tokens = sum(cascade_cost(ex, action) for ex, action in zip(examples, choices))
+    latency_ms = sum(cascade_latency(ex, action) for ex, action in zip(examples, choices))
     return {
         "items": len(examples),
         "accuracy": correct / len(examples),
         "tokens": tokens,
+        "latency_ms": latency_ms,
         "choices": {a.value: sum(action == a for action in choices) for a in Action},
     }
 
