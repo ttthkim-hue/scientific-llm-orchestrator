@@ -147,7 +147,7 @@ That stage is the clearest separation from ordinary adaptive-compute routing.
 ## Publication claim discipline
 
 Do not write:
-- "P-VoCA outperforms adaptive reasoning" before a matched baseline exists.
+- "P-VoCA is superior to adaptive-reasoning baselines" before a matched baseline exists.
 - "Personalized metacognition" before user-conditioned experiments exist.
 - "safer" without paired risk measurements.
 - "human-like" as a scientific conclusion.
