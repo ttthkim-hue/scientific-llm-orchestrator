@@ -277,6 +277,15 @@
       "sha256": "7376c4808680ab54dd1c507269208877a2708b72761ef13acd374a2cf1f308d9"
     },
     {
+      "path": "configs/pvoca-research-decision-evidence.example.json",
+      "sha256": "f5002ab96d7e7eeab81e6f34bd026c09fc542a75ddfbd80977ac40f1ce709dd8",
+      "classification": "example-config",
+      "license_status": "Apache-2.0",
+      "reviewer_status": "pending-semantic-review",
+      "public_safe_decision": "pass-deterministic-only",
+      "reason": "public-safe candidate; human semantic review remains required"
+    },
+    {
       "path": "docs/PVOCA_PAPER_POSITIONING_V3.md",
       "sha256": "e31815df68aff2e8738a93a8c2e32dc512b0df3d4699c2bb545c6c124d378f3a",
       "classification": "documentation",
@@ -475,6 +484,15 @@
       "sha256": "998904d784b7155658ec5798448d9f37040731ba8e01d2d3205d3ea1fd6fc4af"
     },
     {
+      "path": "scripts/assess_pvoca_research_decision.py",
+      "sha256": "125523605707fb4fbabf470f3034539e8bf612c39ecacba8280548762f0f97ce",
+      "classification": "qa-script",
+      "license_status": "Apache-2.0",
+      "reviewer_status": "pending-semantic-review",
+      "public_safe_decision": "pass-deterministic-only",
+      "reason": "public-safe candidate; human semantic review remains required"
+    },
+    {
       "path": "scripts/audit_pvoca_cascade_v3.py",
       "sha256": "370381d64b68c95379b238824897910da56fddd03c9c7c73e29f2a45e917df51",
       "classification": "qa-script",
@@ -566,7 +584,7 @@
     },
     {
       "path": "scripts/train_pvoca_cascade_v3.py",
-      "sha256": "dd838b2dcbfd7eca38e28f78493dd816ad7703cd89a64262a77190dd87779202",
+      "sha256": "7a6ee7ffe8bc5f15714412b380b8d31d632771340afbae9e826e988c44de1a7f",
       "classification": "qa-script",
       "license_status": "Apache-2.0",
       "reviewer_status": "pending-semantic-review",
@@ -665,7 +683,7 @@
     },
     {
       "path": "src/scientific_llm_orchestrator/pvoca_cascade.py",
-      "sha256": "b7f5fee5a4d05e23e67e833374e0f59ee1d1a3da4bb6b0dcd3531bf98a6f489e",
+      "sha256": "d2c93222a55bc8e0f1c94b4325dc1a9da7295da39c5eac371de88b64979f4d5a",
       "classification": "source-code",
       "license_status": "Apache-2.0",
       "reviewer_status": "pending-semantic-review",
@@ -682,8 +700,17 @@
       "reason": "public-safe candidate; human semantic review remains required"
     },
     {
+      "path": "src/scientific_llm_orchestrator/pvoca_decision.py",
+      "sha256": "6b3262408c31b8198a13bdeacfba96dc5a7a780b3161002f31d658297ff9b137",
+      "classification": "source-code",
+      "license_status": "Apache-2.0",
+      "reviewer_status": "pending-semantic-review",
+      "public_safe_decision": "pass-deterministic-only",
+      "reason": "public-safe candidate; human semantic review remains required"
+    },
+    {
       "path": "src/scientific_llm_orchestrator/pvoca_gate.py",
-      "sha256": "42f5342718872aa02b08e2fb0d8e6579884f0818ae7f9e787a7b98287b9cc3b9",
+      "sha256": "e8e71a4a9c7c6860f682a4e9bef6095bc6575b9c630aa146051daa11b7807a50",
       "classification": "source-code",
       "license_status": "Apache-2.0",
       "reviewer_status": "pending-semantic-review",
@@ -791,7 +818,7 @@
     },
     {
       "path": "tests/test_pvoca_cascade.py",
-      "sha256": "6d65c332cfe22efde03653877c764ae47106790c2835be77d67934503bd72f10",
+      "sha256": "824892e2d0d8ec37cd5d15170f3d9e71c522c673643b3bf765873d45b381aa18",
       "classification": "test-code",
       "license_status": "Apache-2.0",
       "reviewer_status": "pending-semantic-review",
@@ -808,8 +835,17 @@
       "reason": "public-safe candidate; human semantic review remains required"
     },
     {
+      "path": "tests/test_pvoca_decision.py",
+      "sha256": "fd166a4668cabed758eba3be1080c8193e648829e3aa5f3fe7555382bbc6307e",
+      "classification": "test-code",
+      "license_status": "Apache-2.0",
+      "reviewer_status": "pending-semantic-review",
+      "public_safe_decision": "pass-deterministic-only",
+      "reason": "public-safe candidate; human semantic review remains required"
+    },
+    {
       "path": "tests/test_pvoca_gate.py",
-      "sha256": "a2ffb5633606f25de302c0a35d637f935bcba165a1500e7b00369b5c411ca6bd",
+      "sha256": "0ea4ce77a2cf46be253b9be8d0b6d9f85db28ea166cb5fdc539f0d9f81136f96",
       "classification": "test-code",
       "license_status": "Apache-2.0",
       "reviewer_status": "pending-semantic-review",
