@@ -1,0 +1,62 @@
+{
+  "schema": "pvoca.experiment-matrix.v3",
+  "status": "ISOLATED_RESEARCH_ONLY",
+  "global_control_plane_mutation_allowed": false,
+  "production_deployment_allowed": false,
+  "v3_trace_regeneration_required": true,
+  "legacy_v0_results_use": "motivation_and_sanity_check_only",
+  "minimum_matrix": {
+    "benchmarks": [
+      {
+        "name": "MatSciBench",
+        "task_family": "materials_numeric",
+        "group_holdout_key": "primary_category",
+        "trace_policy": "all eligible text-only single-scalar numeric items"
+      },
+      {
+        "name": "SciBench",
+        "task_family": "college_science_numeric",
+        "group_holdout_key": "source",
+        "trace_policy": "all deduplicated numeric text items without solution leakage"
+      }
+    ],
+    "models": [
+      {
+        "label": "qwen3.8:27b",
+        "role": "primary_local_backbone",
+        "availability": "previously_observed_on_P8"
+      },
+      {
+        "label": "qwen3.5:4b",
+        "role": "cross_scale_replication",
+        "availability": "previously_observed_on_P8"
+      }
+    ],
+    "required_runs": 4,
+    "evaluation": "group-held-out-5-fold",
+    "temperature": 0
+  },
+  "strong_submission_extension": {
+    "second_model_family_required": true,
+    "second_model_family_status": "NOT_YET_SELECTED",
+    "reason": "Two Qwen scales test scale transfer but do not establish cross-family generalization."
+  },
+  "matched_baselines": [
+    "always_stop",
+    "always_think",
+    "always_verify",
+    "question_only_router"
+  ],
+  "decision_policy": {
+    "paper_evidence_ready": "methodological completeness may pass even for negative/null performance",
+    "global_shadow_candidate": "requires positive mechanism signal plus conservative offline safety/performance thresholds",
+    "global_deploy_candidate": "requires separate >=10000-item clean shadow evidence and remains owner-gated"
+  },
+  "safety": {
+    "hidden_chain_of_thought_required": false,
+    "reference_answer_used_as_feature": false,
+    "benchmark_domain_used_as_feature": false,
+    "benchmark_difficulty_used_as_feature": false,
+    "fail_closed_on_insufficient_stop_evidence": true
+  }
+}
