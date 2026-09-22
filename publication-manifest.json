@@ -278,7 +278,7 @@
     },
     {
       "path": "docs/PVOCA_PAPER_POSITIONING_V3.md",
-      "sha256": "7e99fa9fa4398d000c1a0cad4323b9b518c05377828578daf8df25b364fc415b",
+      "sha256": "e31815df68aff2e8738a93a8c2e32dc512b0df3d4699c2bb545c6c124d378f3a",
       "classification": "documentation",
       "license_status": "Apache-2.0",
       "reviewer_status": "pending-semantic-review",
