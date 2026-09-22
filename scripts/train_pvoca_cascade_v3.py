@@ -123,10 +123,7 @@ def baseline_from_train(rows: list[dict]) -> Action:
         candidates,
         key=lambda action: (
             sum(action_correct(row, action) for row in rows) / len(rows),
-            -sum(
-                int(next(stage for stage in row["stages"] if stage["action"] == action.value)["incremental_tokens"])
-                for row in rows
-            ),
+            -sum(cumulative_outcomes(row)[action][1] for row in rows),
         ),
     )
 
