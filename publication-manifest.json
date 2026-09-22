@@ -547,6 +547,15 @@
       "sha256": "065a176d81846410e80a3d97d86660b14ce75689c93619e874cb7066bd5855b4"
     },
     {
+      "path": "scripts/capture_pvoca_runtime_metadata.py",
+      "sha256": "d3d7445109053f080465475410b38314ba7fc0f0e5e660b9a4216107da3d84b6",
+      "classification": "qa-script",
+      "license_status": "Apache-2.0",
+      "reviewer_status": "pending-semantic-review",
+      "public_safe_decision": "pass-deterministic-only",
+      "reason": "public-safe candidate; human semantic review remains required"
+    },
+    {
       "classification": "qa-script",
       "license_status": "Apache-2.0",
       "path": "scripts/fresh_clone_smoke.py",
@@ -781,6 +790,15 @@
       "reason": "public-safe candidate; human semantic review remains required"
     },
     {
+      "path": "src/scientific_llm_orchestrator/pvoca_repro.py",
+      "sha256": "0545f63796e6b1d740d31b6bbf969dbc1132df41052e1433c62a2aabfafe9901",
+      "classification": "source-code",
+      "license_status": "Apache-2.0",
+      "reviewer_status": "pending-semantic-review",
+      "public_safe_decision": "pass-deterministic-only",
+      "reason": "public-safe candidate; human semantic review remains required"
+    },
+    {
       "path": "src/scientific_llm_orchestrator/pvoca_scibench.py",
       "sha256": "85e4aa4e3013813f0310c80ac4d015af0e33344b74c88a50cd2f1f0f827e5d2a",
       "classification": "source-code",
@@ -945,6 +963,15 @@
     {
       "path": "tests/test_pvoca_policy_pipeline.py",
       "sha256": "8675cf5a617689d32f1dd0c8e6f51232bca975febc6407de771d3d0fb64a8ad2",
+      "classification": "test-code",
+      "license_status": "Apache-2.0",
+      "reviewer_status": "pending-semantic-review",
+      "public_safe_decision": "pass-deterministic-only",
+      "reason": "public-safe candidate; human semantic review remains required"
+    },
+    {
+      "path": "tests/test_pvoca_repro.py",
+      "sha256": "4fb11ba888a3e1a1838891d3cb9caecdc6645911af9fa12315da20702a9ddb9b",
       "classification": "test-code",
       "license_status": "Apache-2.0",
       "reviewer_status": "pending-semantic-review",
